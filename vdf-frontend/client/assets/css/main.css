@@ -1,0 +1,25 @@
+a {
+  text-decoration: none;
+}
+
+.soft-black {
+  color: #282828
+}
+
+.light-gray {
+  color: gray;
+}
+
+.debug-border {
+  border-style: solid;
+  border-width: 2px;
+}
+
+#site-title {
+  color: #282828;
+  text-align:justify;
+}
+
+#site-title:hover {
+  color: gray;
+}
