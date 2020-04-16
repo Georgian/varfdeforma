@@ -29,3 +29,9 @@ app:
     - http://localhost:3000/signed-in
     # - myandroidapp://oauth2/redirect
     # - myiosapp://oauth2/redirect
+
+amazonProperties:
+  region: ''
+  bucketName: ''
+  accessKey: ''
+  secretKey: ''

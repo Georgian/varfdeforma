@@ -23,19 +23,18 @@ services:
       MYSQL_ROOT_PASSWORD: 'wi4nt9rsbn'
   vdf-frontend:
     container_name: vdf-frontend
+    image: georgian/vdf-frontend:latest
     restart: always
     ports:
       - 3000:3000
-    command:
-      npm run start
-  nginx:
-    image: nginx:1.17
-    container_name: nginx
-    ports:
-      - 80:80
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-    depends_on:
-      - vdf-frontend
+  # nginx:
+  #   image: nginx:1.17
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./nginx:/etc/nginx/conf.d
+  #   depends_on:
+  #     - vdf-frontend
 volumes:
   vdf-db:

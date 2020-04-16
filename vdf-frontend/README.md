@@ -54,3 +54,7 @@ https://dev.to/adnanrahic/a-crash-course-on-serverless-side-rendering-with-vuejs
 ## Deploying
 
 npm run deploy
+
+# Building docker image
+
+docker build -t georgian/vdf-frontend .

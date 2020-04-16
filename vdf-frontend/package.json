@@ -5,6 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
     "deploy": "nuxt build && sls deploy"
   },
   "keywords": [],

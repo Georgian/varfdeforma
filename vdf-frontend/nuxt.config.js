@@ -56,7 +56,7 @@ module.exports = {
   },
   modules: [
     ['@nuxtjs/axios', {
-      baseURL: `${require('./secrets.json').NODE_ENV}` === 'production' ? 'https://api.varfdeforma.ro' : 'http://localhost:5000',
+      baseURL: `${require('./secrets.json').NODE_ENV}` === 'production' ? 'https://api.varfdeforma.ro' : 'http://localhost:8080',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
