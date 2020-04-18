@@ -5,7 +5,7 @@ services:
     container_name: vdf-backend
     image: georgian/vdf-backend:latest
     ports:
-      - 8090:8090
+      - 8080:8080
     depends_on:
       - vdf-db
   vdf-db:

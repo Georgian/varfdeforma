@@ -1,4 +1,23 @@
 spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${JDBC_URL:vdf-db:3306}/vdf?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: vdf
+    password: pass
+    # url: jdbc:h2:file:~/workspace/vdf-backend/h2-dev;DB_CLOSE_ON_EXIT=FALSE
+    # url: jdbc:h2:file:~/IdeaProjects/vdf-backend/h2-dev;DB_CLOSE_ON_EXIT=FALSE
+    jpa:
+      database-platform: org.hibernate.dialect.MySQL5Dialect
+      hibernate:
+        ddl-auto: validate
+  #        properties:
+  #          javax:
+  #            persistence:
+  #              schema-generation:
+  #                create-source: metadata
+  #                scripts:
+  #                  action: create
+  #                  create-target: create.sql
   security:
     oauth2:
       client:
@@ -30,8 +49,8 @@ app:
     # - myandroidapp://oauth2/redirect
     # - myiosapp://oauth2/redirect
 
-amazonProperties:
-  region: ''
-  bucketName: ''
-  accessKey: ''
-  secretKey: ''
+s3:
+  region: 'fra1'
+  bucketName: 'vdf'
+  accessKey: 'HS7D4MXKVW25KIBJMK6T'
+  secretKey: 'fjT1o53fGjRGC8+s9dksYqBG0lblHfQkHgH7CXruX+Y'

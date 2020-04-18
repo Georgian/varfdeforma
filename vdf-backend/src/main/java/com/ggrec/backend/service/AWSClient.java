@@ -2,6 +2,7 @@ package com.ggrec.backend.service;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -16,26 +17,33 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.MessageFormat;
 
-@Deprecated
-// @Service
+@Service
 public class AWSClient {
 
     private AmazonS3 s3client;
 
-    @Value("${amazonProperties.region}")
+    @Value("${s3.region}")
     private String region;
-    @Value("${amazonProperties.bucketName}")
+    @Value("${s3.bucketName}")
     private String bucketName;
-    @Value("${amazonProperties.accessKey}")
+    @Value("${s3.accessKey}")
     private String accessKey;
-    @Value("${amazonProperties.secretKey}")
+    @Value("${s3.secretKey}")
     private String secretKey;
+
+    private String getDOServiceEndpoint() {
+        return MessageFormat.format("https://vdf.{0}.digitaloceanspaces.com", region);
+    }
 
     @PostConstruct
     private void initializeAmazon() {
         AmazonS3ClientBuilder clientBuilder = AmazonS3ClientBuilder.standard();
-        clientBuilder.setRegion(region);
+        clientBuilder.setEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
+                getDOServiceEndpoint(),
+                region
+        ));
 
         if (!accessKey.isEmpty() && !secretKey.isEmpty())
             clientBuilder.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)));
@@ -57,5 +65,15 @@ public class AWSClient {
                     .withCannedAcl(CannedAccessControlList.PublicRead));
         }
     }
+
+//    private String buildDOAuthorizationHeader() {
+//        return MessageFormat.format("AWS4-HMAC-SHA256 " +
+//                "Credential={0}/{1}/{2}/s3/aws4_request," +
+//                "SignedHeaders=host;x-amz-acl;x-amz-content-sha256;x-amz-date," +
+//                "", "");
+//
+//
+//        // return "https://vdf.fra1.digitaloceanspaces.com";
+//    }
 
 }

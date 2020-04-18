@@ -11,7 +11,7 @@ public class VDFEventTag {
     private static final String DEFAULT_CATEGORY = "Miscellaneous";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(length = 20)

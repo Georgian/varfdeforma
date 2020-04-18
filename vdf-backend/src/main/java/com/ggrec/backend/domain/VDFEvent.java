@@ -15,7 +15,7 @@ public class VDFEvent implements Serializable {
     private static final String COVER_PHOTO_LINK_FORMAT = "https://vdf-storage.s3.amazonaws.com/event/{0}/cover.jpg";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
