@@ -24,6 +24,7 @@ public class VDFEventService {
     private VDFEventRepository vdfEventRepository;
     @Autowired
     private VDFEventTagRepository vdfEventTagRepository;
+    @Autowired
     private AWSClient awsClient;
 
     public void save(VDFEvent vdfEvent) throws IOException {

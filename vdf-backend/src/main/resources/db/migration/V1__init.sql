@@ -11,7 +11,7 @@ create table users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table vdf_event (
-    id bigint not null,
+    id bigint not null auto_increment,
     age_categories varchar(255),
     date_end date,
     date_start date,
@@ -30,7 +30,7 @@ create table vdf_event (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table vdf_event_tag (
-    id bigint not null,
+    id bigint not null auto_increment,
     category VARCHAR(20) default 'Miscellaneous',
     name varchar(20),
     primary key (id)
@@ -43,7 +43,7 @@ create table vdf_event_tags (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table vdf_organizer (
-    id bigint not null,
+    id bigint not null auto_increment,
     logo_link varchar(255),
     name varchar(255),
     website_link varchar(255),

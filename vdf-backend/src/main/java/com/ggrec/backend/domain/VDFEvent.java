@@ -12,7 +12,7 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class VDFEvent implements Serializable {
 
-    private static final String COVER_PHOTO_LINK_FORMAT = "https://vdf-storage.s3.amazonaws.com/event/{0}/cover.jpg";
+    private static final String COVER_PHOTO_LINK_FORMAT = "https://cdn.varfdeforma.ro/event/{0}/cover.jpg";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

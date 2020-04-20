@@ -34,7 +34,7 @@ public class AWSClient {
     private String secretKey;
 
     private String getDOServiceEndpoint() {
-        return MessageFormat.format("https://vdf.{0}.digitaloceanspaces.com", region);
+        return MessageFormat.format("https://{0}.digitaloceanspaces.com", region);
     }
 
     @PostConstruct
