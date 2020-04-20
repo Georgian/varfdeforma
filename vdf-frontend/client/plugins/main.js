@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueProgressBar from 'vue-progressbar'
 import VueLazyload from 'vue-lazyload'
+
 import '~/assets/css/main.css'
 
 // Vue.use(VueGoogleMaps, {

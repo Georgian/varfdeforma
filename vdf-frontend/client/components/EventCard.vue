@@ -30,6 +30,7 @@
           {{ tag.name }}
         </v-chip>
       </v-flex>
+
     </v-layout>
   </v-card>
 </template>

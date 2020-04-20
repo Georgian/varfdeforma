@@ -54,3 +54,24 @@ alter table users add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email);
 alter table vdf_event_tags add constraint UK_a06v1q0xomjh3t9rj1s40qrop unique (tags_id);
 alter table vdf_event_tags add constraint FK8gianffswbpm2fe9hs1mkq8s3 foreign key (tags_id) references vdf_event_tag (id);
 alter table vdf_event_tags add constraint FKm4uqht2qhqopjitdlf6qx7tdm foreign key (vdf_event_id) references vdf_event (id);
+
+insert into vdf_event_tag (category, name)
+values
+    ('MTB', 'XCM'),
+    ('MTB', 'XCO'),
+    ('MTB', 'Enduro'),
+    ('MTB', 'Downhill'),
+    ('MTB', 'Trial'),
+    ('Sosea', 'Fond'),
+    ('Sosea', 'Criterium'),
+    ('Sosea', 'Contratimp'),
+    ('Sosea', 'Randonneur'),
+    ('Sosea', 'Fond'),
+    ('Ciclocross', 'Ciclocross'),
+    ('Miscellaneous', 'Virtual'),
+    ('Miscellaneous', 'Copii'),
+    ('Miscellaneous', 'Cupa Nationala'),
+    ('Miscellaneous', 'Campionat National'),
+    ('Miscellaneous', 'Stage Race');
+
+

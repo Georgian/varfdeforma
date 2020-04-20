@@ -4,6 +4,14 @@
     :sort-by="['count:desc', 'name:asc']"
     inline-template
   >
+    <v-col cols="12">
+      <v-row>
+        <v-card v-for="facet in facetValues" :key="facet.name">
+          test
+        </v-card>
+      </v-row>
+    </v-col>
+
     <v-layout column>
       <v-flex v-for="facet in facetValues" :key="facet.name" my-1 py-1>
         <v-layout row align-center justify-right fill-width>

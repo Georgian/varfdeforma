@@ -2,35 +2,20 @@
   <v-list dense>
     <!-- <v-flex xs12>
       <vdf-misc-filter></vdf-misc-filter>
-    </v-flex> 
-
+    </v-flex>
     <v-divider /> -->
 
-    <v-flex>
-      <v-subheader>Sport</v-subheader>
-      <vdf-sport-filter />
-    </v-flex>
+    <v-subheader>Sport</v-subheader>
+    <vdf-sport-filter />
 
-    <v-divider />
+    <v-subheader>Disciplină</v-subheader>
+    <vdf-facet-filter facet-name="discipline" />
 
-    <v-flex xs12 pb-5>
-      <v-subheader>Disciplină</v-subheader>
-      <vdf-facet-filter facet-name="discipline" />
-    </v-flex>
+    <v-subheader>Etichetă</v-subheader>
+    <vdf-facet-filter facet-name="miscellaneous" />
 
-    <v-divider />
-
-    <v-flex xs12 pb-5>
-      <v-subheader>Etichetă</v-subheader>
-      <vdf-facet-filter facet-name="miscellaneous" />
-    </v-flex>
-
-    <v-divider />
-
-    <v-flex xs12>
-      <v-subheader>Organizator</v-subheader>
-      <vdf-facet-filter facet-name="organizer" />
-    </v-flex>
+    <v-subheader>Organizator</v-subheader>
+    <vdf-facet-filter facet-name="organizer" />
   </v-list>
 </template>
 
@@ -49,4 +34,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.debug {
+  border-style: solid;
+}
+</style>
