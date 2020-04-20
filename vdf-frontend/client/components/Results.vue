@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Component } from 'vue-instantsearch'
+// import { Component } from 'vue-instantsearch'
 import EventCard from './EventCard'
 import VdfMap from './map/VdfMap'
 
@@ -29,7 +29,7 @@ export default {
     'vdf-event-card': EventCard,
     'vdf-map': VdfMap
   },
-  mixins: [Component],
+  // mixins: [Component],
   data: () => ({
     showGrid: true
   }),

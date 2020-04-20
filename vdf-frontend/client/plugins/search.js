@@ -1,5 +1,4 @@
 import InstantSearch from 'vue-instantsearch'
-import { Store } from 'vue-instantsearch'
 import AlgoliaSearchHelper from 'algoliasearch-helper'
 import Vue from 'vue'
 
@@ -23,23 +22,24 @@ var createSearchStoreFromVuex = function (store) {
     //     'MTB': 1
     //   }
     // },
-    'nbHits': 1,
-    'page': 0,
-    'nbPages': 1,
-    'hitsPerPage': 20,
-    'processingTimeMS': 3,
-    'exhaustiveNbHits': true,
-    'query': 'playstation4 (500gb) us ',
-    'params': 'query=playstation4%20(500gb)%20us%20&page=0&highlightPreTag=__ais-highlight__&highlightPostTag=__%2Fais-highlight__&facets=%5B%5D&tagFilters=',
-    'index': 'vdf'
+    nbHits: 1,
+    page: 0,
+    nbPages: 1,
+    hitsPerPage: 20,
+    processingTimeMS: 3,
+    exhaustiveNbHits: true,
+    query: 'playstation4 (500gb) us ',
+    params:
+      'query=playstation4%20(500gb)%20us%20&page=0&highlightPreTag=__ais-highlight__&highlightPostTag=__%2Fais-highlight__&facets=%5B%5D&tagFilters=',
+    index: 'vdf',
   }
 
   var result = {
-    'results': [ ]
+    results: [],
   }
 
   const client = {
-    search (requests) {
+    search(requests) {
       /**
        * Split string of facets (or array) provided by algolia, and retain the facets
        * in a map, then pass it to our own store.
@@ -49,7 +49,10 @@ var createSearchStoreFromVuex = function (store) {
       if (facetsArray != null) {
         facetsArray.forEach(function (singleFacetArray) {
           // Some sort of hack because that's how algolia search provides the facet filters.
-          if (typeof singleFacetArray === 'string' || singleFacetArray instanceof String) {
+          if (
+            typeof singleFacetArray === 'string' ||
+            singleFacetArray instanceof String
+          ) {
             var facet = singleFacetArray.split(':')
 
             var key = facet[0]
@@ -96,29 +99,39 @@ var createSearchStoreFromVuex = function (store) {
       facets.organizer = {}
 
       events.forEach(function (e) {
-        e.tags.forEach(tag => {
+        e.tags.forEach((tag) => {
           let tagCategory = tag.category
           let tagName = tag.name
 
           if (tagCategory === 'Miscellaneous') {
             // 1. MISC
             let currentMiscellaneousCount = facets.miscellaneous[tagName]
-            facets.miscellaneous[tagName] = currentMiscellaneousCount == null ? 1 : parseInt(currentMiscellaneousCount) + 1
+            facets.miscellaneous[tagName] =
+              currentMiscellaneousCount == null
+                ? 1
+                : parseInt(currentMiscellaneousCount) + 1
           } else {
             // 2. SPORT
             let currentSportCount = facets.sport[tagCategory]
-            facets.sport[tagCategory] = currentSportCount == null ? 1 : parseInt(currentSportCount) + 1
+            facets.sport[tagCategory] =
+              currentSportCount == null ? 1 : parseInt(currentSportCount) + 1
 
             // 3. DISCIPLINE
             let currentDisciplineCount = facets.discipline[tagName]
-            facets.discipline[tagName] = currentDisciplineCount == null ? 1 : parseInt(currentDisciplineCount) + 1
+            facets.discipline[tagName] =
+              currentDisciplineCount == null
+                ? 1
+                : parseInt(currentDisciplineCount) + 1
           }
         })
 
         // 4. ORGANIZER
         if (e.organizer != null) {
           let currentOrganizerCount = facets.organizer[e.organizer]
-          facets.organizer[e.organizer] = currentOrganizerCount == null ? 1 : parseInt(currentOrganizerCount) + 1
+          facets.organizer[e.organizer] =
+            currentOrganizerCount == null
+              ? 1
+              : parseInt(currentOrganizerCount) + 1
         }
       })
 
@@ -127,14 +140,14 @@ var createSearchStoreFromVuex = function (store) {
       result.results.push(aisResultObject)
 
       return Promise.resolve(result)
-    }
+    },
   }
 
   const helper = new AlgoliaSearchHelper(client, 'vdf', {
-    facets: ['discipline', 'miscellaneous', 'organizer', 'sport']
+    facets: ['discipline', 'miscellaneous', 'organizer', 'sport'],
   })
 
-  return new Store(helper)
+  return helper
 }
 
 export default createSearchStoreFromVuex

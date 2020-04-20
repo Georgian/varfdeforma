@@ -21,6 +21,6 @@ const binaryMimeTypes = [
   'text/xml'
 ]
 
-module.exports.nuxt = sls(nuxt, {
-  binary: binaryMimeTypes
+export const nuxt = sls(nuxt, {
+  binary: binaryMimeTypes,
 })

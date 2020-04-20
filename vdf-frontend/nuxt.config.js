@@ -2,12 +2,11 @@
 module.exports = {
   mode: 'universal',
   plugins: [
-    {src: '~/plugins/v-calendar.js', ssr: false},
+    {src: '~/plugins/v-calendar.js', mode: 'client'},
     '~/plugins/main.js',
-    '~/plugins/fb-sdk.js',
-    '~/plugins/vuetify.js',
-    '~/plugins/search.js',
-    '~/plugins/axios.js'
+    {src:'~/plugins/fb-sdk.js', mode: 'client'},
+    // '~/plugins/search.js',
+    // '~/plugins/axios.js'
   ],
   css: [
     '~/assets/css/main.css'
@@ -27,7 +26,12 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
+  buildModules: [
+    // Simple usage
+    '@nuxtjs/vuetify',
+  ],
   build: {
+    transpile: ['vue-instantsearch', 'instantsearch.js/es'],
     html: {
       minify: {
         collapseBooleanAttributes: true,

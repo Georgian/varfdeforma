@@ -2,12 +2,12 @@
   <v-app id="vdf">
     <!-- When on search page -->
     <v-flex v-if="enableAisIndex">
-      <ais-index :search-store="searchStore" index-name="vdf">
+      <ais-instant-search :search-function="searchFunction">
         <vdf-nav-drawer />
         <vdf-header show-drawer-icon />
         <nuxt />
         <vdf-footer />
-      </ais-index>
+      </ais-instant-search>
     </v-flex>
 
     <!-- When not on search page -->
@@ -17,7 +17,7 @@
       <vdf-footer />
     </v-flex>
 
-    <no-ssr>
+    <client-only>
       <cookie-law
         theme="blood-orange"
         button-text="Am înțeles!"
@@ -32,11 +32,12 @@
           >
         </div>
       </cookie-law>
-    </no-ssr>
+    </client-only>
   </v-app>
 </template>
 
 <script>
+import AisInstantSearch from 'vue-instantsearch'
 import VdfHeader from '~/components/Header'
 import VdfFooter from '~/components/Footer'
 import VdfNavDrawer from '~/components/NavDrawer'
@@ -45,13 +46,20 @@ import createSearchStoreFromVuex from '../plugins/search'
 
 export default {
   components: {
+    AisInstantSearch,
     VdfHeader,
     VdfFooter,
     VdfNavDrawer,
-    CookieLaw
+    CookieLaw,
   },
   data: () => ({
-    searchStore: null
+    searchFunction(helper) {
+      console.log('searched')
+      if (helper.state.query) {
+        console.log('searched')
+        // helper.search()
+      }
+    },
   }),
   computed: {
     enableAisIndex() {
@@ -59,13 +67,13 @@ export default {
     },
     eventCount() {
       return this.$store.getters['modules/events/events']
-    }
+    },
   },
   watch: {
     $route: 'routeChanged',
     eventCount(newCount, oldCount) {
       this.searchStore.refresh()
-    }
+    },
   },
   created() {
     this.searchStore = createSearchStoreFromVuex(this.$store)
@@ -76,7 +84,7 @@ export default {
   methods: {
     routeChanged() {
       if (this.enableAisIndex) this.$store.dispatch('modules/events/loadEvents')
-    }
-  }
+    },
+  },
 }
 </script>

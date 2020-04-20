@@ -8,7 +8,7 @@
         outline
       ></v-text-field>
       <v-flex>
-        <no-ssr>
+        <client-only>
           <v-date-picker v-model="selectedDate" is-expanded mode="range">
             <v-text-field
               slot-scope="props"
@@ -20,7 +20,7 @@
             >
             </v-text-field>
           </v-date-picker>
-        </no-ssr>
+        </client-only>
       </v-flex>
       <v-layout row>
         <v-text-field

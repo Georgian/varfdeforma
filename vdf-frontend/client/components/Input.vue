@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { Component } from 'vue-instantsearch'
+// import { Component } from 'vue-instantsearch'
 
 export default {
-  mixins: [Component],
+  // mixins: [Component],
   computed: {
     query: {
       get () {

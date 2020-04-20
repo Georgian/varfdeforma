@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${JDBC_URL:vdf-db:3306}/vdf?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: jdbc:mysql://${JDBC_URL:vdf-db:3306}/vdf?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: vdf
     password: pass
     # url: jdbc:h2:file:~/workspace/vdf-backend/h2-dev;DB_CLOSE_ON_EXIT=FALSE
@@ -25,7 +25,8 @@ spring:
           facebook:
             clientId: 214006909435830
             clientSecret: f5d068fef008569180b59d3b565729c7
-            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            # redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            redirectUriTemplate: "{baseUrl}/login/oauth2/code/facebook"
             scope:
             - email
             - public_profile

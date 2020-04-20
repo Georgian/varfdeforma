@@ -15,11 +15,11 @@
   </v-radio-group>
 </template>
 <script>
-import { Component } from 'vue-instantsearch'
+// import { Component } from 'vue-instantsearch'
 
 export default {
   name: 'VdfSportFilter',
-  mixins: [Component],
+  // mixins: [Component],
   data() {
     return {
       radioGroup: 'radio-1'
