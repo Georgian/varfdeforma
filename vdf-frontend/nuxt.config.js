@@ -5,7 +5,7 @@ module.exports = {
     {src: '~/plugins/v-calendar.js', mode: 'client'},
     '~/plugins/main.js',
     {src:'~/plugins/fb-sdk.js', mode: 'client'},
-    // '~/plugins/search.js',
+    '~/plugins/search.js',
     // '~/plugins/axios.js'
   ],
   css: [

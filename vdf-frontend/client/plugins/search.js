@@ -143,11 +143,9 @@ var createSearchStoreFromVuex = function (store) {
     },
   }
 
-  const helper = new AlgoliaSearchHelper(client, 'vdf', {
+  return new AlgoliaSearchHelper(client, 'vdf', {
     facets: ['discipline', 'miscellaneous', 'organizer', 'sport'],
   })
-
-  return helper
 }
 
 export default createSearchStoreFromVuex

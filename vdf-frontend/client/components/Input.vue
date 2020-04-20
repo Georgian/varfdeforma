@@ -4,7 +4,8 @@
     solo-inverted
     flat
     label="Caută eveniment"
-    prepend-inner-icon="search">
+    prepend-inner-icon="search"
+  >
   </v-text-field>
 </template>
 
@@ -15,21 +16,21 @@ export default {
   // mixins: [Component],
   computed: {
     query: {
-      get () {
+      get() {
         return this.searchStore.query
       },
-      set (value) {
+      set(value) {
         this.searchStore.query = value
         this.$emit('query', value)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
 <style scoped>
-  .compact-form {
-    transform: scale(0.875);
-    transform-origin: left;
-  }
+.compact-form {
+  transform: scale(0.875);
+  transform-origin: left;
+}
 </style>
