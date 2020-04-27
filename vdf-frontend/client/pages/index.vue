@@ -22,34 +22,39 @@ import {
   AisSearchBox,
   createInstantSearch,
 } from 'vue-instantsearch'
-import createSearchStoreFromVuex from '~/plugins/search.js'
+
+// https://github.com/algolia/react-instantsearch/issues/2847#issuecomment-535476270
+const reqCache = new Map()
+const promiseCache = new Map()
+
+const doRequest = (body) =>
+  fetch('http://localhost:8080/search', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body,
+  }).then((res) => res.json())
 
 const searchClient = {
-  search(requests) {
-    var aisResultObject = {
-      hits: [],
-      facets: {
-        sport: {
-          MTB: 1,
-        },
-      },
-      nbHits: 1,
-      page: 0,
-      nbPages: 1,
-      hitsPerPage: 20,
-      processingTimeMS: 3,
-      exhaustiveNbHits: true,
-      query: 'playstation4 (500gb) us ',
-      params:
-        'query=playstation4%20(500gb)%20us%20&page=0&highlightPreTag=__ais-highlight__&highlightPostTag=__%2Fais-highlight__&facets=%5B%5D&tagFilters=',
-      index: 'vdf',
-    }
+  async search(requests) {
+    const body = JSON.stringify(requests[0].params)
+    const cached = reqCache.get(body)
+    if (cached) return cached
 
-    var result = {
-      results: [aisResultObject, aisResultObject],
-    }
+    const promiseCached = promiseCache.get(body)
+    if (promiseCached) return promiseCached
 
-    return Promise.resolve(result)
+    console.log(body)
+    const promise = doRequest(body)
+    promiseCache.set(body, promise)
+
+    const response = await promise
+    reqCache.set(body, response)
+
+    promiseCache.delete(body)
+
+    return response
   },
 }
 
