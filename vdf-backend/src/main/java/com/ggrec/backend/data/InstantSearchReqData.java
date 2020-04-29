@@ -12,5 +12,5 @@ public class InstantSearchReqData {
     private String highlightPostTag;
     private List<String> facets;
     private String tagFilters;
-    private List<List<String>> facetFilters;
+    private List<Object> facetFilters;
 }

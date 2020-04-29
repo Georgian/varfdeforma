@@ -1,9 +1,13 @@
 package com.ggrec.backend.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+@Data
+@Accessors(chain = true)
 @Entity(name = "vdf_event_tag")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class VDFEventTag {
@@ -19,29 +23,5 @@ public class VDFEventTag {
 
     @Column(columnDefinition="VARCHAR(20) default '" + DEFAULT_CATEGORY + "'")
     private String category;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
 }
