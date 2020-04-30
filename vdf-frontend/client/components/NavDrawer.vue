@@ -8,29 +8,29 @@
     disable-resize-watcher
     disable-route-watcher
   >
-    <vdf-main-filter/>
+    // TODO for mobile
+    <!--    <vdf-main-filter />-->
   </v-navigation-drawer>
 </template>
 
 <script>
-  import VdfMainFilter from '~/components/MainFilter'
+import VdfMainFilter from '~/components/MainFilter'
 
-  export default {
-    name: 'vdf-nav-drawer',
-    data: () => ({
-      showDrawer: false
-    }),
-    components: {
-      VdfMainFilter
-    },
-    created() {
-      this.$eventBus.$on('toggleDrawer', () => {
-        this.showDrawer = !this.showDrawer
-      })
-    }
-  }
+export default {
+  name: 'VdfNavDrawer',
+  components: {
+    VdfMainFilter,
+  },
+  data: () => ({
+    showDrawer: false,
+  }),
+  created() {
+    // TODO
+    // this.$eventBus.$on('toggleDrawer', () => {
+    //   this.showDrawer = !this.showDrawer
+    // })
+  },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

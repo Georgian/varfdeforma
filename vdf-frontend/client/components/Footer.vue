@@ -12,7 +12,8 @@
           target="_blank"
           rel="noopener"
         >
-          Informații greșite? Contribuie aici <font-awesome-icon icon="heart"></font-awesome-icon>
+          Informații greșite? Contribuie aici
+          <font-awesome-icon icon="heart"></font-awesome-icon>
         </a>
       </v-flex>
       <v-flex mb-3>
@@ -31,7 +32,7 @@
 
 <script>
 export default {
-  name: 'VdfFooter'
+  name: 'VdfFooter',
 }
 </script>
 

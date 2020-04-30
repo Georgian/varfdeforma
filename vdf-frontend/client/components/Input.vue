@@ -1,6 +1,5 @@
 <template>
   <v-text-field
-    v-model.lazy="query"
     solo-inverted
     flat
     label="Caută eveniment"

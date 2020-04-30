@@ -27,25 +27,25 @@ export default {
   name: 'VdfResults',
   components: {
     'vdf-event-card': EventCard,
-    'vdf-map': VdfMap
+    'vdf-map': VdfMap,
   },
   // mixins: [Component],
   data: () => ({
-    showGrid: true
+    showGrid: true,
   }),
   computed: {
     results: function results() {
-      return this.searchStore.results
-    }
+      // return this.searchStore.results
+    },
   },
   created: function created() {
-    this.$eventBus.$on('toggleDisplayMode', () => {
-      this.showGrid = !this.showGrid
-    })
+    // this.$eventBus.$on('toggleDisplayMode', () => {
+    //   this.showGrid = !this.showGrid
+    // })
   },
-  mounted: function() {
-    this.searchStore.start()
-  }
+  mounted: function () {
+    // this.searchStore.start()
+  },
 }
 </script>
 

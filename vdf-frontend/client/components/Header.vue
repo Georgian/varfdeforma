@@ -2,15 +2,15 @@
   <v-toolbar app fixed clipped-left>
     <vue-progress-bar />
     <div class="hidden-lg-and-up ma-0 pa-0">
-      <v-toolbar-side-icon
+      <v-app-bar-nav-icon
         v-if="showDrawerIcon"
         @click="showHideDrawer"
-      ></v-toolbar-side-icon>
+      ></v-app-bar-nav-icon>
     </div>
     <v-toolbar-title>
       <router-link to="/">
         <span id="site-title" class="title"
-          >Vârf de Formă<sup style="color: indianred; font-size: 12px"
+          >Vârf de Formă<sup style="color: indianred; font-size: 12px;"
             >ALPHA</sup
           ></span
         >
@@ -39,13 +39,13 @@ export default {
   name: 'VdfHeader',
   components: {
     VdfDisplayModeSwitch,
-    'vdf-input': Input
+    'vdf-input': Input,
   },
   props: {
     showDrawerIcon: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     isAuthenticated() {
@@ -53,7 +53,7 @@ export default {
     },
     isHomePage() {
       return this.$route.name === 'index'
-    }
+    },
   },
   methods: {
     showHideDrawer() {
@@ -66,8 +66,8 @@ export default {
     logout() {
       this.$store.dispatch('modules/auth/logout')
       this.$router.replace('/')
-    }
-  }
+    },
+  },
 }
 </script>
 

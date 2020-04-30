@@ -1,6 +1,6 @@
 <template>
   <ais-refinement-list
-    :attribute-name="facetName"
+    :attribute="facetName"
     :sort-by="['count:desc', 'name:asc']"
     inline-template
   >
@@ -8,13 +8,13 @@
       <v-flex v-for="facet in facetValues" :key="facet.name" my-1 py-1>
         <v-layout row align-center justify-right fill-width>
           <v-checkbox
-            :label="facet.name"
             v-model="facet.isRefined"
+            :label="facet.name"
             class="test my-1"
             hide-details
             @change="toggleRefinement(facet)"
           ></v-checkbox>
-          <div class="badge ">{{ facet.count }}</div>
+          <div class="badge">{{ facet.count }}</div>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -28,9 +28,9 @@ export default {
   props: {
     facetName: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

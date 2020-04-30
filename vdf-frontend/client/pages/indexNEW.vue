@@ -1,46 +1,27 @@
 <template>
-  <v-app id="vdf">
-    <!-- When on search page -->
-    <v-flex>
-      <ais-instant-search-ssr index-name="vdf">
-        <vdf-nav-drawer />
-        <vdf-header show-drawer-icon />
-        <nuxt />
-        <vdf-footer />
-      </ais-instant-search-ssr>
-    </v-flex>
-
-    <!-- TODO -->
-    <!-- When not on search page -->
-    <!--    <vdf-header :show-drawer-icon="false" />-->
-    <!--    <nuxt />-->
-    <!--    <vdf-footer />-->
-
-    <client-only>
-      <cookie-law
-        theme="blood-orange"
-        button-text="Am înțeles!"
-        button-link-text=""
-      >
-        <div slot="message">
-          Acest website folosește cookie-uri pentru a furniza vizitatorilor o
-          experiență mult mai bună de navigare și servicii adaptate nevoilor și
-          interesului fiecăruia. Citește
-          <router-link to="/termeni" class="white--text"
-            >Termeni și Condiții</router-link
-          >
-        </div>
-      </cookie-law>
-    </client-only>
-  </v-app>
+  <v-content>
+    <v-container grid-list-xl>
+      <v-layout row wrap>
+        <ais-instant-search-ssr>
+          <ais-search-box />
+          <ais-hits>
+            <template slot="item" slot-scope="{ item }">
+              hi
+            </template>
+          </ais-hits>
+        </ais-instant-search-ssr>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
 
 <script>
-import { AisInstantSearchSsr, createInstantSearch } from 'vue-instantsearch'
-import VdfHeader from '~/components/Header'
-import VdfFooter from '~/components/Footer'
-import VdfNavDrawer from '~/components/NavDrawer'
-import CookieLaw from 'vue-cookie-law'
+import {
+  AisInstantSearchSsr,
+  AisHits,
+  AisSearchBox,
+  createInstantSearch,
+} from 'vue-instantsearch'
 
 // https://github.com/algolia/react-instantsearch/issues/2847#issuecomment-535476270
 const reqCache = new Map()
@@ -86,10 +67,8 @@ const { instantsearch, rootMixin } = createInstantSearch({
 export default {
   components: {
     AisInstantSearchSsr,
-    VdfHeader,
-    VdfFooter,
-    VdfNavDrawer,
-    CookieLaw,
+    AisHits,
+    AisSearchBox,
   },
   mixins: [rootMixin],
   asyncData() {
@@ -121,3 +100,5 @@ export default {
   },
 }
 </script>
+
+<style></style>
