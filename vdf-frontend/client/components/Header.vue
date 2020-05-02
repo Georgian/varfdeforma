@@ -16,8 +16,8 @@
         >
       </router-link>
     </v-toolbar-title>
-    <v-flex v-if="isHomePage" mt-2 ml-2>
-      <vdf-input />
+    <v-flex v-if="isHomePage" mt-7 ml-2>
+      <vdf-debounced-search-box />
     </v-flex>
     <vdf-display-mode-switch v-if="isHomePage" />
     <v-spacer />
@@ -32,14 +32,14 @@
 </template>
 
 <script>
-import Input from './Input'
+import VdfDebouncedSearchBox from './search/VdfDebouncedSearchBox'
 import VdfDisplayModeSwitch from './DisplayModeSwitch'
 
 export default {
   name: 'VdfHeader',
   components: {
     VdfDisplayModeSwitch,
-    'vdf-input': Input,
+    VdfDebouncedSearchBox,
   },
   props: {
     showDrawerIcon: {

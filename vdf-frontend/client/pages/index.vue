@@ -27,22 +27,13 @@
               </ais-menu>
 
               <v-subheader>Disciplină</v-subheader>
-              <ais-refinement-list
-                attribute="discipline"
-                :sort-by="['count:desc', 'name:asc']"
-              />
+              <vdf-refinement-list attribute="discipline" />
 
               <v-subheader>Etichetă</v-subheader>
-              <ais-refinement-list
-                attribute="miscellaneous"
-                :sort-by="['count:desc', 'name:asc']"
-              />
+              <vdf-refinement-list attribute="miscellaneous" />
 
               <v-subheader>Organizator</v-subheader>
-              <ais-refinement-list
-                attribute="organizer"
-                :sort-by="['count:desc', 'name:asc']"
-              />
+              <vdf-refinement-list attribute="organizer" />
             </v-list>
           </v-flex>
           <v-flex lg10>
@@ -60,22 +51,18 @@
 </template>
 
 <script>
-import {
-  AisHits,
-  AisRefinementList,
-  AisInstantSearchSsr,
-  AisMenu,
-} from 'vue-instantsearch'
+import { AisHits, AisInstantSearchSsr, AisMenu } from 'vue-instantsearch'
 import VdfHits from '../components/Hits'
 import VdfMainFilter from '../components/MainFilter'
 import VdfHeader from '~/components/Header'
 import VdfFooter from '~/components/Footer'
 import VdfNavDrawer from '~/components/NavDrawer'
+import VdfRefinementList from '../components/search/VdfRefinementList'
 
 export default {
   components: {
+    VdfRefinementList,
     AisInstantSearchSsr,
-    AisRefinementList,
     VdfHeader,
     AisMenu,
     VdfFooter,
@@ -136,29 +123,4 @@ export default {
 }
 </script>
 
-<style>
-.v-input--selection-controls {
-  padding: 0;
-  margin: 0;
-}
-.ais-RefinementList-item {
-  list-style: none;
-}
-.v-application ul {
-  padding-left: 0;
-}
-.ais-RefinementList-count {
-  float: right;
-  min-width: 10px;
-  margin-top: 4px;
-  padding: 3px 7px;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #777;
-  border-radius: 8px;
-}
-</style>
+<style></style>

@@ -1,13 +1,17 @@
 package com.ggrec.backend.service;
 
 import com.ggrec.backend.data.InstantSearchReqData;
+import com.ggrec.backend.data.InstantSearchResponseData;
 import com.ggrec.backend.data.VDFEventData;
+import com.ggrec.backend.data.VDFEventTagData;
 import com.ggrec.backend.domain.VDFEvent;
 import com.ggrec.backend.domain.VDFEventTag;
 import com.ggrec.backend.domain.VDFFacets;
 import com.ggrec.backend.repository.VDFEventRepository;
 import com.ggrec.backend.repository.VDFEventTagRepository;
+import com.google.common.collect.Maps;
 import com.nimbusds.oauth2.sdk.util.CollectionUtils;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +22,15 @@ import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@AllArgsConstructor(onConstructor_ = {@Autowired})
 public class VDFEventService {
 
     private static final String EVENT_FOLDER = "event";
@@ -32,13 +39,6 @@ public class VDFEventService {
     private final VDFEventRepository vdfEventRepository;
     private final VDFEventTagRepository vdfEventTagRepository;
     private final AWSClient awsClient;
-
-    @Autowired
-    public VDFEventService(VDFEventRepository vdfEventRepository, VDFEventTagRepository vdfEventTagRepository, AWSClient awsClient) {
-        this.vdfEventRepository = vdfEventRepository;
-        this.vdfEventTagRepository = vdfEventTagRepository;
-        this.awsClient = awsClient;
-    }
 
     public void save(VDFEvent vdfEvent) throws IOException {
         VDFEvent savedEvent = vdfEventRepository.save(vdfEvent);
@@ -113,17 +113,44 @@ public class VDFEventService {
 
     // TODO Properly implement querying, don't fetch all
     // TODO Maybe move the search in a separate service and cache results in reddis
-    public List<VDFEventData> search(InstantSearchReqData request) {
-        Stream<VDFEvent> results = vdfEventRepository.findAll().stream();
+    public InstantSearchResponseData search(InstantSearchReqData request) {
+        List<VDFEvent> allEvents = vdfEventRepository.findAll();
+        Stream<VDFEvent> results = allEvents.stream();
 
         String query = request.getQuery();
         if (StringUtils.isNotEmpty(query))
-            results = results.filter(event -> event.getName().matches(query));
+            results = results.filter(event -> event.getName().toLowerCase().contains(query.toLowerCase()));
 
         if (CollectionUtils.isNotEmpty(request.getFacetFilters()))
             results = results.filter(event -> matchesFacetFilters(event, request.getFacetFilters()));
 
-        return results.map(VDFEventData::fromDomain).collect(Collectors.toList());
+        return new InstantSearchResponseData()
+                .setFacets(buildFacets(allEvents))
+                .setHits(results.map(VDFEventData::fromDomain).collect(Collectors.toList()));
+    }
+
+    private void incrementFacetCount(String facetKey, String facetValue, Map<String, Map<String, Integer>> facets) {
+        facets.computeIfAbsent(facetKey, v -> Maps.newHashMap()).merge(facetValue, 1, Integer::sum);
+    }
+
+    private Map<String, Map<String, Integer>> buildFacets(List<VDFEvent> hits) {
+        Map<String, Map<String, Integer>> facets = new HashMap<>();
+        for (VDFEvent hit : hits) {
+            for (VDFEventTag tag : hit.getTags()) {
+                String category = tag.getCategory();
+                String tagName = tag.getName();
+
+                if (category.equalsIgnoreCase(VDFFacets.miscellaneous.toString())) {
+                    incrementFacetCount(VDFFacets.miscellaneous.toString(), tagName, facets);
+                } else {
+                    incrementFacetCount(VDFFacets.sport.toString(), category, facets);
+                    incrementFacetCount(VDFFacets.discipline.toString(), tagName, facets);
+                }
+            }
+
+            incrementFacetCount(VDFFacets.organizer.toString(), hit.getOrganizer(), facets);
+        }
+        return facets;
     }
 
 }
