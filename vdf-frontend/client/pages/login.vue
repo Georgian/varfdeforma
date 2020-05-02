@@ -58,7 +58,6 @@ export default {
           password: this.password,
         })
         .then((result) => {
-          console.log(result.data)
           this.alert = { type: 'success', message: result.data.message }
           this.loading = false
           this.$router.push('/')

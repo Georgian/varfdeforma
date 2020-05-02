@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -118,9 +120,8 @@ public class VDFEventService {
         if (StringUtils.isNotEmpty(query))
             results = results.filter(event -> event.getName().matches(query));
 
-        List<Object> facetFilters = request.getFacetFilters();
-        if (CollectionUtils.isNotEmpty(facetFilters))
-            results = results.filter(event -> matchesFacetFilters(event, facetFilters));
+        if (CollectionUtils.isNotEmpty(request.getFacetFilters()))
+            results = results.filter(event -> matchesFacetFilters(event, request.getFacetFilters()));
 
         return results.map(VDFEventData::fromDomain).collect(Collectors.toList());
     }

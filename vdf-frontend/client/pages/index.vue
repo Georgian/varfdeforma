@@ -8,6 +8,23 @@
           <v-flex lg2 pl-0 hidden-md-and-down>
             <v-list dense>
               <v-subheader>Sport</v-subheader>
+              <ais-menu attribute="sport" :sort-by="['count:desc', 'name:asc']">
+                <v-radio-group
+                  slot-scope="{ items, refine }"
+                  :v-model="radioValue"
+                  :mandatory="true"
+                  hide-details
+                >
+                  <v-radio label="Toate" @change="refine()" />
+                  <v-radio
+                    v-for="item in items"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                    @change="refine(item.value)"
+                  />
+                </v-radio-group>
+              </ais-menu>
 
               <v-subheader>Disciplină</v-subheader>
               <ais-refinement-list
@@ -47,6 +64,7 @@ import {
   AisHits,
   AisRefinementList,
   AisInstantSearchSsr,
+  AisMenu,
 } from 'vue-instantsearch'
 import VdfHits from '../components/Hits'
 import VdfMainFilter from '../components/MainFilter'
@@ -59,6 +77,7 @@ export default {
     AisInstantSearchSsr,
     AisRefinementList,
     VdfHeader,
+    AisMenu,
     VdfFooter,
     VdfNavDrawer,
     VdfMainFilter,
@@ -71,8 +90,13 @@ export default {
     const instantsearch = app.$instantsearch
     return instantsearch
       .findResultsState({
-        // hitsPerPage: 1,
-        facets: ['miscellaneous', 'discipline', 'organizer', 'sport'],
+        facets: ['miscellaneous', 'discipline', 'organizer'],
+        hierarchicalFacets: [
+          {
+            name: 'sport',
+            attributes: ['MTB', 'Sosea', 'Ciclocross'],
+          },
+        ],
       })
       .then(() => ({
         instantSearchState: instantsearch.getState(),
@@ -81,6 +105,7 @@ export default {
   data: () => ({
     drawer: null,
     instantSearchState: null,
+    radioValue: 'Toate',
   }),
   beforeMount() {
     // Nuxt will merge `asyncData` and `data` on the client
@@ -111,4 +136,29 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.v-input--selection-controls {
+  padding: 0;
+  margin: 0;
+}
+.ais-RefinementList-item {
+  list-style: none;
+}
+.v-application ul {
+  padding-left: 0;
+}
+.ais-RefinementList-count {
+  float: right;
+  min-width: 10px;
+  margin-top: 4px;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #777;
+  border-radius: 8px;
+}
+</style>

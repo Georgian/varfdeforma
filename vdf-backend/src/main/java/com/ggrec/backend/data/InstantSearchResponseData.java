@@ -1,7 +1,9 @@
 package com.ggrec.backend.data;
 
+import com.google.common.collect.ImmutableMap;
 import lombok.Data;
 import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -16,8 +18,15 @@ public class InstantSearchResponseData {
         if (CollectionUtils.isEmpty(results)) {
             results = new ArrayList<>();
             results.add(new InstantSearchResponseResultData());
+            results.add(new InstantSearchResponseResultData().setFacets(ImmutableMap.of(
+                    "sport",
+                    ImmutableMap.of(
+                            "MTB", 1,
+                            "Sosea", 1
+                    )
+            )));
         }
-        return results.get(0);
+        return  results.get(0);
     }
 
     public InstantSearchResponseData setHits(List<VDFEventData> hits) {
@@ -30,6 +39,7 @@ public class InstantSearchResponseData {
         return this;
     }
 
+    @Accessors(chain = true)
     @Data
     private static class InstantSearchResponseResultData {
         private List<VDFEventData> hits;
