@@ -1,30 +1,36 @@
 <template>
-  <ais-refinement-list
-    :attribute="facetName"
-    :sort-by="['count:desc', 'name:asc']"
-    inline-template
-  >
-    <v-layout column>
-      <v-flex v-for="facet in facetValues" :key="facet.name" my-1 py-1>
-        <v-layout row align-center justify-right fill-width>
-          <v-checkbox
-            v-model="facet.isRefined"
-            :label="facet.name"
-            class="test my-1"
-            hide-details
-            @change="toggleRefinement(facet)"
-          ></v-checkbox>
-          <div class="badge">{{ facet.count }}</div>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </ais-refinement-list>
+  <div>
+    <ais-refinement-list
+      :attribute="facetName"
+      :sort-by="['count:desc', 'name:asc']"
+    />
+    <!--      <template slot-scope="{ refine, items }">-->
+    <!--        <v-layout column>-->
+    <!--          <v-flex v-for="facet in items" :key="facet.value" my-1 py-1>-->
+    <!--            <v-layout row align-center justify-right fill-width>-->
+    <!--              <v-checkbox-->
+    <!--                v-model="facet.isRefined"-->
+    <!--                :label="facet.value"-->
+    <!--                class="test my-1"-->
+    <!--                hide-details-->
+    <!--                @change="refine(facet.value)"-->
+    <!--              ></v-checkbox>-->
+    <!--              <div class="badge">{{ facet.count }}</div>-->
+    <!--            </v-layout>-->
+    <!--          </v-flex>-->
+    <!--        </v-layout>-->
+    <!--      </template>-->
+  </div>
 </template>
 
 <script>
+import AisRefinementList from 'vue-instantsearch'
+
 export default {
   name: 'VdfFacetFilter',
-  components: {},
+  components: {
+    AisRefinementList,
+  },
   props: {
     facetName: {
       type: String,

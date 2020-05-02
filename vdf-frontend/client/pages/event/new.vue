@@ -22,8 +22,8 @@
             <client-only>
               <v-date-picker v-model="selectedDate" is-expanded mode="range">
                 <v-text-field
-                  slot-scope="props"
                   v-model="selectedDateText"
+                  slot-scope="props"
                   readonly
                   label="Date"
                   outline
@@ -48,8 +48,8 @@
           <v-layout row wrap>
             <v-flex v-for="tag in allTags" :key="tag.name" md2 sm4 xs10>
               <v-checkbox
-                :label="tag.name"
                 v-model="selectedTags"
+                :label="tag.name"
                 :value="tag"
               ></v-checkbox>
             </v-flex>
@@ -111,9 +111,9 @@
 import Vue from 'vue'
 
 export default {
-  name: 'EventEditPage',
+  name: 'EventNewPage',
   middleware: 'unauth-redirect',
-  data: function() {
+  data: function () {
     return {
       vdfEvent: {},
       selectedTags: [],
@@ -122,52 +122,51 @@ export default {
       isFBReady: false,
       selectedDate: {
         start: null,
-        end: null
+        end: null,
       },
-      selectedDateText: null
+      selectedDateText: null,
     }
   },
   watch: {
-    selectedDate: function(newVal, oldVal) {
+    selectedDate: function (newVal, oldVal) {
       this.selectedDateText = this.formatDate(newVal.start, newVal.end)
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.isFBReady = Vue.FB != undefined
     window.addEventListener('fb-sdk-ready', this.onFBReady)
   },
   created() {
     let self = this
-    this.$axios.get('/event/tags').then(response => {
-      console.log(response.data)
+    this.$axios.get('/event/tags').then((response) => {
       self.allTags = response.data
     })
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     window.removeEventListener('fb-sdk-ready', this.onFBReady)
   },
   methods: {
-    onFBReady: function() {
+    onFBReady: function () {
       this.isFBReady = true
     },
-    hasTag: function(tag) {
+    hasTag: function (tag) {
       return this.vdfEvent.tags.includes(tag)
     },
-    save: function() {
+    save: function () {
       this.vdfEvent.dateStart = this.formatDateISO(this.selectedDate.start)
       this.vdfEvent.dateEnd = this.formatDateISO(this.selectedDate.end)
       this.vdfEvent.tags = this.selectedTags
       this.$axios
         .post('/event/', this.vdfEvent)
-        .then(respone => {
+        .then((respone) => {
           confirm('Saved!')
           this.$router.push('/')
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
-    }
-  }
+    },
+  },
 }
 </script>
 

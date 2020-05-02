@@ -3,16 +3,16 @@ import Cookie from 'js-cookie'
 
 const state = () => ({
   token: null,
-  user: null
+  user: null,
 })
 
 const getters = {
-  getToken (state) {
+  getToken(state) {
     return state.token
   },
-  isAuthenticated (state) {
+  isAuthenticated(state) {
     return !!state.user
-  }
+  },
 }
 
 const mutations = {
@@ -21,7 +21,7 @@ const mutations = {
   },
   SET_TOKEN: function (state, token) {
     state.token = token
-  }
+  },
 }
 
 const actions = {
@@ -38,7 +38,7 @@ const actions = {
   },
   async loginSuccess({ commit }, token) {
     let payload = jwtDecode(token)
-    Cookie.set('token', token, { expires: 1 / 24 * 6 })  // Expire for 6h
+    Cookie.set('token', token, { expires: (1 / 24) * 6 }) // Expire for 6h
     commit('SET_TOKEN', token)
     commit('SET_USER', payload)
   },
@@ -46,7 +46,7 @@ const actions = {
     Cookie.remove('token')
     commit('SET_USER', null)
     commit('SET_TOKEN', null)
-  }
+  },
 }
 
 export default {
@@ -54,5 +54,5 @@ export default {
   actions,
   mutations,
   getters,
-  namespaced: true
+  namespaced: true,
 }

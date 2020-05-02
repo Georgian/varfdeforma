@@ -1,10 +1,6 @@
 <template>
   <v-card height="430px" class="flexcard">
-    <img
-      v-lazy="vdfEvent.photoLink"
-      :style="vdfEvent.isPastEvent() ? 'filter: grayscale(100%);' : ''"
-      height="200px"
-    />
+    <img v-lazy="vdfEvent.photoLink" height="200px" />
 
     <v-flex pb-0>
       <a :href="`/event/${vdfEvent.id}`"
@@ -30,7 +26,6 @@
           {{ tag.name }}
         </v-chip>
       </v-flex>
-
     </v-layout>
   </v-card>
 </template>
@@ -38,18 +33,18 @@
 <script>
 export default {
   props: {
-    vdfEvent: { type: Object, required: true }
+    vdfEvent: { type: Object, required: true },
   },
   data() {
     return {
-      trophyIcon: '/trophy.png'
+      trophyIcon: '/trophy.png',
     }
   },
   methods: {
     tagLabel(tag) {
       let name = tag.name
-    }
-  }
+    },
+  },
 }
 </script>
 

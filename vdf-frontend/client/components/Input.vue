@@ -1,7 +1,6 @@
 <template>
   <v-text-field
     solo-inverted
-    flat
     label="Caută eveniment"
     prepend-inner-icon="search"
   >

@@ -20,13 +20,13 @@ Vue.use(VueLazyload, {
   error: '/no-image.jpg',
   attempt: 1,
   // the default is ['scroll', 'wheel', 'mousewheel', 'resize', 'animationend', 'transitionend']
-  listenEvents: [ 'scroll' ]
+  listenEvents: ['scroll'],
 })
 
 Vue.use(VueProgressBar, {
   color: '#8860D0',
   failedColor: 'red',
-  height: '3px'
+  height: '3px',
 })
 
 let filter = function (text, length, clamp) {
@@ -77,20 +77,32 @@ Vue.mixin({
   methods: {
     formatDate: function (dateStartString, dateEndString) {
       let locale = 'ro-RO'
-      let options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }
+      let options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }
 
       let dateStart = new Date(dateStartString)
       var result = dateStart.toLocaleDateString(locale, options)
 
       if (dateEndString) {
-        let formattedDateEndString = new Date(dateEndString).toLocaleDateString(locale, options)
-        result = result + ' - ' + formattedDateEndString.charAt(0).toUpperCase() + formattedDateEndString.slice(1)
+        let formattedDateEndString = new Date(dateEndString).toLocaleDateString(
+          locale,
+          options
+        )
+        result =
+          result +
+          ' - ' +
+          formattedDateEndString.charAt(0).toUpperCase() +
+          formattedDateEndString.slice(1)
       }
 
       return result.charAt(0).toUpperCase() + result.slice(1)
     },
-    formatDateISO: function(dateObj) {
-      return dateObj.toISOString().slice(0,10);
-    }
-  }
+    formatDateISO: function (dateObj) {
+      return dateObj.toISOString().slice(0, 10)
+    },
+  },
 })

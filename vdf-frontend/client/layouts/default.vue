@@ -1,20 +1,7 @@
 <template>
   <v-app id="vdf">
     <!-- When on search page -->
-    <v-flex>
-      <ais-instant-search-ssr index-name="vdf">
-        <vdf-nav-drawer />
-        <vdf-header show-drawer-icon />
-        <nuxt />
-        <vdf-footer />
-      </ais-instant-search-ssr>
-    </v-flex>
-
-    <!-- TODO -->
-    <!-- When not on search page -->
-    <!--    <vdf-header :show-drawer-icon="false" />-->
-    <!--    <nuxt />-->
-    <!--    <vdf-footer />-->
+    <nuxt />
 
     <client-only>
       <cookie-law
@@ -36,88 +23,11 @@
 </template>
 
 <script>
-import { AisInstantSearchSsr, createInstantSearch } from 'vue-instantsearch'
-import VdfHeader from '~/components/Header'
-import VdfFooter from '~/components/Footer'
-import VdfNavDrawer from '~/components/NavDrawer'
 import CookieLaw from 'vue-cookie-law'
-
-// https://github.com/algolia/react-instantsearch/issues/2847#issuecomment-535476270
-const reqCache = new Map()
-const promiseCache = new Map()
-
-const doRequest = (body) =>
-  fetch('http://localhost:8080/search', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body,
-  }).then((res) => res.json())
-
-const searchClient = {
-  async search(requests) {
-    const body = JSON.stringify(requests[0].params)
-    const cached = reqCache.get(body)
-    if (cached) return cached
-
-    const promiseCached = promiseCache.get(body)
-    if (promiseCached) return promiseCached
-
-    const promise = doRequest(body)
-    promiseCache.set(body, promise)
-
-    const response = await promise
-    reqCache.set(body, response)
-
-    promiseCache.delete(body)
-
-    return response
-  },
-}
-
-// const searchClient = createSearchStoreFromVuex($store)
-
-const { instantsearch, rootMixin } = createInstantSearch({
-  searchClient,
-  indexName: 'vdf',
-})
 
 export default {
   components: {
-    AisInstantSearchSsr,
-    VdfHeader,
-    VdfFooter,
-    VdfNavDrawer,
     CookieLaw,
-  },
-  mixins: [rootMixin],
-  asyncData() {
-    return instantsearch
-      .findResultsState({
-        query: 'a',
-        // hitsPerPage: 1,
-        // facets: ['sport'],
-        // facetsRefinements: { sport: ['MTB'] },
-      })
-      .then(() => ({
-        algoliaState: instantsearch.getState(),
-      }))
-  },
-  beforeMount() {
-    // Nuxt will merge `asyncData` and `data` on the client
-    instantsearch.hydrate(this.algoliaState)
-  },
-  head() {
-    return {
-      link: [
-        {
-          rel: 'stylesheet',
-          href:
-            'https://unpkg.com/instantsearch.css@7.1.0/themes/algolia-min.css',
-        },
-      ],
-    }
   },
 }
 </script>

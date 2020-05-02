@@ -6,7 +6,7 @@ module.exports = {
     '~/plugins/main.js',
     {src:'~/plugins/fb-sdk.js', mode: 'client'},
     '~/plugins/search.js',
-    // '~/plugins/axios.js'
+    '~/plugins/axios.js'
   ],
   css: [
     '~/assets/css/main.css'

@@ -9,28 +9,37 @@
     <vdf-sport-filter />
 
     <v-subheader>Disciplină</v-subheader>
-    <vdf-facet-filter facet-name="discipline" />
+    <ais-refinement-list
+      attribute="discipline"
+      :sort-by="['count:desc', 'name:asc']"
+    />
 
     <v-subheader>Etichetă</v-subheader>
-    <vdf-facet-filter facet-name="miscellaneous" />
+    <ais-refinement-list
+      attribute="miscellaneous"
+      :sort-by="['count:desc', 'name:asc']"
+    />
 
     <v-subheader>Organizator</v-subheader>
-    <vdf-facet-filter facet-name="organizer" />
+    <ais-refinement-list
+      attribute="organizer"
+      :sort-by="['count:desc', 'name:asc']"
+    />
   </v-list>
 </template>
 
 <script>
 import VdfSportFilter from '~/components/SportFilter'
-import VdfMiscFilter from '~/components/MiscFilter'
 import VdfFacetFilter from '~/components/FacetFilter'
+import AisRefinementList from 'vue-instantsearch'
 
 export default {
   name: 'VdfMainFilter',
   components: {
+    AisRefinementList,
     VdfFacetFilter,
-    VdfMiscFilter,
-    VdfSportFilter
-  }
+    VdfSportFilter,
+  },
 }
 </script>
 

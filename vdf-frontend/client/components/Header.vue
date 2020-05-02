@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app fixed clipped-left>
+  <v-app-bar app fixed clipped-left>
     <vue-progress-bar />
     <div class="hidden-lg-and-up ma-0 pa-0">
       <v-app-bar-nav-icon
@@ -22,13 +22,13 @@
     <vdf-display-mode-switch v-if="isHomePage" />
     <v-spacer />
     <v-toolbar-items>
-      <v-btn v-if="!isAuthenticated" flat @click="goToLoginPage()">
+      <v-btn v-if="!isAuthenticated" text @click="goToLoginPage()">
         <font-awesome-icon icon="sign-in-alt" />
         Login
       </v-btn>
-      <v-btn v-if="isAuthenticated" flat @click="logout()">Logout</v-btn>
+      <v-btn v-if="isAuthenticated" text @click="logout()">Logout</v-btn>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
