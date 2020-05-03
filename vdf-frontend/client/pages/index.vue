@@ -6,35 +6,33 @@
       <v-container grid-list-xl>
         <v-layout row wrap>
           <v-flex lg2 pl-0 hidden-md-and-down>
-            <v-list dense>
-              <v-subheader>Sport</v-subheader>
-              <ais-menu attribute="sport" :sort-by="['count:desc', 'name:asc']">
-                <v-radio-group
-                  slot-scope="{ items, refine }"
-                  :v-model="radioValue"
-                  :mandatory="true"
-                  hide-details
-                >
-                  <v-radio label="Toate" @change="refine()" />
-                  <v-radio
-                    v-for="item in items"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                    @change="refine(item.value)"
-                  />
-                </v-radio-group>
-              </ais-menu>
-
-              <v-subheader>Disciplină</v-subheader>
-              <vdf-refinement-list attribute="discipline" />
-
-              <v-subheader>Etichetă</v-subheader>
-              <vdf-refinement-list attribute="miscellaneous" />
-
-              <v-subheader>Organizator</v-subheader>
-              <vdf-refinement-list attribute="organizer" />
-            </v-list>
+            <v-container lg2 pl-0 hidden-md-and-down>
+              <v-row>
+                <v-col class="pa-0">
+                  <v-flex pa-0 pb-2>
+                    <vdf-sport-menu title="Sport" attribute="sport" />
+                  </v-flex>
+                  <v-flex pa-0 pb-2>
+                    <vdf-refinement-list
+                      title="Disciplină"
+                      attribute="discipline"
+                    />
+                  </v-flex>
+                  <v-flex pa-0 pb-2>
+                    <vdf-refinement-list
+                      title="Etichetă"
+                      attribute="miscellaneous"
+                    />
+                  </v-flex>
+                  <v-flex pa-0 pb-2>
+                    <vdf-refinement-list
+                      title="Organizator"
+                      attribute="organizer"
+                    />
+                  </v-flex>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-flex>
           <v-flex lg10>
             <ais-hits>
@@ -58,10 +56,12 @@ import VdfHeader from '~/components/Header'
 import VdfFooter from '~/components/Footer'
 import VdfNavDrawer from '~/components/NavDrawer'
 import VdfRefinementList from '../components/search/VdfRefinementList'
+import VdfSportMenu from '../components/search/VdfSportMenu'
 
 export default {
   components: {
     VdfRefinementList,
+    VdfSportMenu,
     AisInstantSearchSsr,
     VdfHeader,
     AisMenu,

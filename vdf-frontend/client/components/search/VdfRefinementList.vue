@@ -1,6 +1,9 @@
 <template>
-  <v-flex>
-    <v-row v-for="item in items" :key="item.value">
+  <v-card class="pb-2 mb-2">
+    <v-flex>
+      <div class="overline">{{ title }}</div>
+    </v-flex>
+    <v-list-item v-for="item in items" :key="item.value">
       <v-checkbox
         class="ais-RefinementList-label"
         hide-details
@@ -8,8 +11,8 @@
         @change="state.refine(item.value)"
       />
       <span class="ais-RefinementList-count">{{ item.count }}</span>
-    </v-row>
-  </v-flex>
+    </v-list-item>
+  </v-card>
 </template>
 
 <script>
@@ -20,11 +23,14 @@ export default {
   name: 'VdfRefinementList',
   mixins: [createWidgetMixin({ connector: connectRefinementList })],
   props: {
+    title: {
+      type: String,
+      required: true,
+    },
     attribute: {
       type: String,
       required: true,
     },
-    // :sort-by="['count:desc', 'name:asc']
   },
   computed: {
     widgetParams() {
@@ -40,6 +46,9 @@ export default {
 </script>
 
 <style scoped>
+.v-list-item {
+  min-height: 36px;
+}
 .v-input--selection-controls {
   padding: 0;
   margin: 0;
@@ -66,5 +75,18 @@ export default {
 .ais-RefinementList-label {
   align-items: center;
   display: flex;
+}
+.badge {
+  float: right;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #777;
+  border-radius: 8px;
 }
 </style>
