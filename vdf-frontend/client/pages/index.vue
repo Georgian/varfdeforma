@@ -1,60 +1,60 @@
 <template>
-  <v-content>
+  <v-app id="vdf">
     <ais-instant-search-ssr index-name="vdf">
       <!-- <vdf-nav-drawer /> -->
       <vdf-header show-drawer-icon />
-      <v-container grid-list-xl>
-        <v-layout row wrap>
-          <v-flex lg2 pl-0 hidden-md-and-down>
-            <v-container lg2 pl-0 hidden-md-and-down>
-              <v-row>
-                <v-col class="pa-0">
-                  <v-flex pa-0 pb-2>
-                    <vdf-sport-menu title="Sport" attribute="sport" />
-                  </v-flex>
-                  <v-flex pa-0 pb-2>
-                    <vdf-refinement-list
-                      title="Disciplină"
-                      attribute="discipline"
-                    />
-                  </v-flex>
-                  <v-flex pa-0 pb-2>
-                    <vdf-refinement-list
-                      title="Etichetă"
-                      attribute="miscellaneous"
-                    />
-                  </v-flex>
-                  <v-flex pa-0 pb-2>
-                    <vdf-refinement-list
-                      title="Organizator"
-                      attribute="organizer"
-                    />
-                  </v-flex>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-flex>
-          <v-flex lg10>
-            <ais-hits>
-              <template slot-scope="{ items }">
-                <vdf-hits :results="items" />
-              </template>
-            </ais-hits>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <v-content>
+        <v-container grid-list-xl>
+          <v-layout row wrap>
+            <v-flex lg2 pl-0 hidden-md-and-down>
+              <v-container lg2 pl-0 hidden-md-and-down>
+                <v-row>
+                  <v-col class="pa-0">
+                    <v-flex pa-0 pb-2>
+                      <vdf-sport-menu title="Sport" attribute="sport" />
+                    </v-flex>
+                    <v-flex pa-0 pb-2>
+                      <vdf-refinement-list
+                        title="Disciplină"
+                        attribute="discipline"
+                      />
+                    </v-flex>
+                    <v-flex pa-0 pb-2>
+                      <vdf-refinement-list
+                        title="Etichetă"
+                        attribute="miscellaneous"
+                      />
+                    </v-flex>
+                    <v-flex pa-0 pb-2>
+                      <vdf-refinement-list
+                        title="Organizator"
+                        attribute="organizer"
+                      />
+                    </v-flex>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-flex>
+            <v-flex lg10>
+              <ais-hits>
+                <template slot-scope="{ items }">
+                  <vdf-hits :results="items" />
+                </template>
+              </ais-hits>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
       <!-- <vdf-footer />-->
     </ais-instant-search-ssr>
-  </v-content>
+  </v-app>
 </template>
 
 <script>
-import { AisHits, AisInstantSearchSsr, AisMenu } from 'vue-instantsearch'
+import { AisHits, AisInstantSearchSsr } from 'vue-instantsearch'
 import VdfHits from '../components/Hits'
-import VdfMainFilter from '../components/MainFilter'
 import VdfHeader from '~/components/Header'
 import VdfFooter from '~/components/Footer'
-import VdfNavDrawer from '~/components/NavDrawer'
 import VdfRefinementList from '../components/search/VdfRefinementList'
 import VdfSportMenu from '../components/search/VdfSportMenu'
 
@@ -64,14 +64,9 @@ export default {
     VdfSportMenu,
     AisInstantSearchSsr,
     VdfHeader,
-    AisMenu,
     VdfFooter,
-    VdfNavDrawer,
-    VdfMainFilter,
     AisHits,
     VdfHits,
-    // VdfMiscFilter,
-    // VdfSportFilter,
   },
   asyncData({ app }) {
     const instantsearch = app.$instantsearch

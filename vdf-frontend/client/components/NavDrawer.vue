@@ -14,12 +14,9 @@
 </template>
 
 <script>
-import VdfMainFilter from '~/components/MainFilter'
-
 export default {
   name: 'VdfNavDrawer',
   components: {
-    VdfMainFilter,
   },
   data: () => ({
     showDrawer: false,

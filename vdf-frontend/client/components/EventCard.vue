@@ -3,7 +3,7 @@
     <img v-lazy="vdfEvent.photoLink" height="200px" />
 
     <v-flex pb-0>
-      <a :href="`/event/${vdfEvent.id}`"
+      <a
         ><h2 class="hover-item-text-underline soft-black">
           {{ vdfEvent.name }}
         </h2></a
@@ -19,14 +19,13 @@
       </span>
     </v-flex>
 
-    <v-layout row wrap align-start justify-start>
-      <v-flex>
+    <v-flex>
+      <v-chip-group column>
         <v-chip v-for="tag in vdfEvent.tags" :key="tag.name" label>
-          <v-img :src="trophyIcon"></v-img>
           {{ tag.name }}
         </v-chip>
-      </v-flex>
-    </v-layout>
+      </v-chip-group>
+    </v-flex>
   </v-card>
 </template>
 
@@ -40,11 +39,10 @@ export default {
       trophyIcon: '/trophy.png',
     }
   },
-  methods: {
-    tagLabel(tag) {
-      let name = tag.name
-    },
+  mounted() {
+    console.log(this.vdfEvent)
   },
+  methods: {},
 }
 </script>
 
@@ -61,5 +59,9 @@ img {
 }
 .trophy-tag {
   color: yellow;
+}
+.debug-border {
+  border-style: solid;
+  border-width: 2px;
 }
 </style>

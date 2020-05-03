@@ -2,12 +2,14 @@
 <!-- Courtesy of https://github.com/minazeTTK/myVNDB/blob/master/src/components/extra/components/DebouncedSearchBox.vue -->
 <template>
   <v-text-field
+    v-model="query"
     solo-inverted
     label="Caută eveniment"
-    v-model="query"
     prepend-inner-icon="search"
-  >
-  </v-text-field>
+    hide-details
+    flat
+    class="mr-2"
+  />
 </template>
 
 <script>
@@ -54,9 +56,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.compact-form {
-  transform: scale(0.875);
-  transform-origin: left;
-}
-</style>
+<style scoped></style>

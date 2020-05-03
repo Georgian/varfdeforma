@@ -14,6 +14,8 @@ public class VDFEventData {
     private long id;
     private String name;
     private String organizer;
+    private String photoLink;
+    private String locationName;
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private String description;
@@ -24,6 +26,8 @@ public class VDFEventData {
                 .setId(domain.getId())
                 .setName(domain.getName())
                 .setOrganizer(domain.getOrganizer())
+                .setPhotoLink(domain.getPhotoLink())
+                .setLocationName(domain.getLocationName())
                 .setDateStart(domain.getDateStart())
                 .setDateEnd(domain.getDateEnd())
                 .setDescription(domain.getDescription())

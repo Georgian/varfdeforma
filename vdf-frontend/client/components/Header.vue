@@ -1,13 +1,13 @@
 <template>
   <v-app-bar app fixed clipped-left>
     <vue-progress-bar />
-    <div class="hidden-lg-and-up ma-0 pa-0">
-      <v-app-bar-nav-icon
-        v-if="showDrawerIcon"
-        @click="showHideDrawer"
-      ></v-app-bar-nav-icon>
-    </div>
-    <v-toolbar-title>
+    <!--      <v-col class="hidden-lg-and-up ma-0 pa-0" cols="1">-->
+    <!--        <v-app-bar-nav-icon-->
+    <!--          v-if="showDrawerIcon"-->
+    <!--          @click="showHideDrawer"-->
+    <!--        ></v-app-bar-nav-icon>-->
+    <!--      </v-col>-->
+    <span class="title ml-3 mr-5">
       <router-link to="/">
         <span id="site-title" class="title"
           >Vârf de Formă<sup style="color: indianred; font-size: 12px;"
@@ -15,10 +15,8 @@
           ></span
         >
       </router-link>
-    </v-toolbar-title>
-    <v-flex v-if="isHomePage" mt-7 ml-2>
-      <vdf-debounced-search-box />
-    </v-flex>
+    </span>
+    <vdf-debounced-search-box v-if="isHomePage" />
     <vdf-display-mode-switch v-if="isHomePage" />
     <v-spacer />
     <v-toolbar-items>
@@ -58,7 +56,7 @@ export default {
   methods: {
     showHideDrawer() {
       // this.$store.dispatch('showHideDrawer')
-      this.$eventBus.$emit('toggleDrawer')
+      // this.$eventBus.$emit('toggleDrawer')
     },
     goToLoginPage() {
       this.$router.replace('/login')
