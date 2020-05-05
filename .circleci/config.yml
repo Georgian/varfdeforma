@@ -33,9 +33,9 @@ jobs:
             name: Install dependencies
             command: |
                   apk add --no-cache \
-                      py3
+                      py2-pip-10.0.1-r0
                   pip install \
-                      docker-compose
+                      docker-compose=1.25.5
                   
       # Download and cache dependencies
       - restore_cache:
