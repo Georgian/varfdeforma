@@ -22,7 +22,7 @@ jobs:
     working_directory: ~/vdf
       
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: docker:18.06.0-ce-git
       
     steps:
       - checkout
