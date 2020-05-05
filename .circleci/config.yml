@@ -40,4 +40,28 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-
+      
+      - run:
+          # TODO Should either:
+          # A. Create a multi-project gradle build script
+          # B. Create parallel CircleCI jobs to build each docker image
+          name: Build docker images
+          command: |
+            pwd
+            cd vdf-backend
+            gradle dockerBuildImage
+            cd ../vdf-frontend
+            docker build -t georgian/vdf-frontend:latest .
+            cd ..
+            
+      - run:
+          name: Push docker images
+          command: |
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push georgian/vdf-backend:latest
+            docker push georgian/vdf-frontend:latest
+            
+      - run:
+          name: Deploy to Digital Ocean and run services
+          command: |
+            bash ./deploy.sh -h $DEPLOY_HOST -u $DEPLOY_USER -r $RAW_REPO_URL
