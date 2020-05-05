@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - setup_remote_docker
-          version: docker:18.06.0-ce
+          version: 18.06.0-ce
       - checkout
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
       
@@ -53,9 +53,10 @@ jobs:
           name: Build docker images
           command: |
             pwd
-            cd vdf-backend
-            gradle dockerBuildImage
-            cd ../vdf-frontend
+            #cd vdf-backend
+            #gradle dockerBuildImage
+            #cd ../vdf-frontend
+            cd vdf-frontend
             docker build -t georgian/vdf-frontend:latest .
             cd ..
             
