@@ -17,7 +17,7 @@
       </router-link>
     </span>
     <vdf-debounced-search-box v-if="isHomePage" />
-    <vdf-display-mode-switch v-if="isHomePage" />
+    <view-mode-switch v-if="isHomePage" />
     <v-spacer />
     <v-toolbar-items>
       <v-btn v-if="!isAuthenticated" text @click="goToLoginPage()">
@@ -31,12 +31,12 @@
 
 <script>
 import VdfDebouncedSearchBox from './search/VdfDebouncedSearchBox'
-import VdfDisplayModeSwitch from './DisplayModeSwitch'
+import ViewModeSwitch from './ViewModeSwitch'
 
 export default {
   name: 'VdfHeader',
   components: {
-    VdfDisplayModeSwitch,
+    ViewModeSwitch,
     VdfDebouncedSearchBox,
   },
   props: {

@@ -1,10 +1,11 @@
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode'
 
 export const actions = {
-
   nuxtServerInit({ commit }, { req, app }) {
     try {
-      const jwtCookie = req.headers.cookie.split(";").find(c => c.trim().startsWith("token="))
+      const jwtCookie = req.headers.cookie
+        .split(';')
+        .find((c) => c.trim().startsWith('token='))
       if (jwtCookie) {
         let token = jwtCookie.split('=')[1]
         let payload = jwtDecode(token)
@@ -15,8 +16,6 @@ export const actions = {
           app.$axios.setToken(token, 'Bearer')
         }
       }
-    } catch (error) {
-
-    }
-  }
+    } catch (error) {}
+  },
 }

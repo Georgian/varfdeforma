@@ -13,7 +13,7 @@
             label="Password"
             type="password"
           ></v-text-field>
-          <v-btn type="submit" :loading="loading" :disabled="loading"
+          <v-btn type="submit" :loading="loading" disabled="true"
             >Log In</v-btn
           >
           <v-btn

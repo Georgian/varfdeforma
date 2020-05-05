@@ -39,9 +39,7 @@ export default {
       trophyIcon: '/trophy.png',
     }
   },
-  mounted() {
-    console.log(this.vdfEvent)
-  },
+  mounted() {},
   methods: {},
 }
 </script>
