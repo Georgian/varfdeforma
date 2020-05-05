@@ -20,7 +20,6 @@ jobs:
 
     steps:
       - setup_remote_docker
-          version: 18.06.0-ce
       - checkout
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
       
