@@ -26,7 +26,8 @@ jobs:
       - run:
             name: Install dependencies
             command: |
-                sudo apt-get update 
+                # https://github.com/romaricp/kit-starter-symfony-4-docker/issues/10
+                sudo rm -rf /var/lib/apt/lists/* && sudo apt update                
                 sudo apt-get install python3.6
                   
       # Download and cache dependencies
