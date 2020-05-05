@@ -21,6 +21,8 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      # Because I'm using a docker image
+      - run: RUN apk add --no-cache openssh-client 
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
       
       - run:
