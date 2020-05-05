@@ -21,16 +21,17 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
-      
       - run:
-            name: Install dependencies
-            command: |
-                run apk --no-cache add --virtual native-deps \
-                  g++ gcc libgcc libstdc++ linux-headers make python && \
-                  npm install --quiet node-gyp -g &&\
-                  npm install --quiet && \
-                  apk del native-deps
+          name: Install dependencies
+          command: |
+              run apk --no-cache add openssh-client \
+              run apk --no-cache add --virtual native-deps \
+                g++ gcc libgcc libstdc++ linux-headers make python && \
+                npm install --quiet node-gyp -g &&\
+                npm install --quiet && \
+                apk del native-deps
+                  
+      - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
                   
       # Download and cache dependencies
       - restore_cache:
