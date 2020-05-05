@@ -16,22 +16,18 @@ jobs:
     working_directory: ~/vdf
   
     docker:
-      - image: docker:18.06.0-ce
+      - image: circleci/openjdk:11-jdk
 
     steps:
       - setup_remote_docker
       - checkout
-      # Because I'm using a docker image
-      - run: RUN apk add --no-cache openssh-client 
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
       
       - run:
             name: Install dependencies
             command: |
                   apk add --no-cache \
-                      py-pip=9.0.0-r1
-                  pip install \
-                      docker-compose=1.25.5
+                      py3-pip
                   
       # Download and cache dependencies
       - restore_cache:
