@@ -29,6 +29,12 @@ jobs:
             cd vdf-frontend
             docker build -t georgian/vdf-frontend:latest .
             cd ..
+     
+      - run:
+          name: Push docker images
+          command: |
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push georgian/vdf-frontend:latest
 
   build:
     working_directory: ~/vdf
