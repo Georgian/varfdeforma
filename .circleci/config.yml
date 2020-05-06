@@ -17,6 +17,10 @@ jobs:
       - image: circleci/node:stretch
     
     steps:
+      - run:
+          name: Installing dependencies
+          command: |
+            RUN apt-get update || : && apt-get install python -y
       - setup_remote_docker
       - checkout
       - run:
