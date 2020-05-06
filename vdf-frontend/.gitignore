@@ -15,7 +15,7 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
-secrets.json
+.env
 .nuxt
 .serverless/cloudformation-template-create-stack.json
 .serverless/cloudformation-template-update-stack.json

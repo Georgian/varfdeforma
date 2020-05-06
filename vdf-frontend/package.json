@@ -4,9 +4,9 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NODE_ENV=dev nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "NODE_ENV=production nuxt start",
     "deploy": "nuxt build && sls deploy"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "@nuxtjs/sitemap": "^2.2.0",
     "algoliasearch": "^4.2.0",
     "axios": "^0.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "google-maps": "^4.2.3",
     "google-maps-api-loader": "^1.1.1",

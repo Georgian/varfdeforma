@@ -1,3 +1,5 @@
+dotenv = require('dotenv').config()
+
 // nuxt.config.js
 module.exports = {
   mode: 'universal',
@@ -53,14 +55,12 @@ module.exports = {
         useShortDoctype: true
       }
     },
-    publicPath: `/${require('./secrets.json').NODE_ENV}/_nuxt/`, // <= add the path to the cached files
+    publicPath: `/${process.env.NODE_ENV}/_nuxt/`, // <= add the path to the cached files
   },
-  env: {
-    baseFrontendURL: `${require('./secrets.json').NODE_ENV}` === 'production' ? 'https://varfdeforma.ro' : 'http://localhost:3000',
-  },
+  env: dotenv.parsed,
   modules: [
     ['@nuxtjs/axios', {
-      baseURL: `${require('./secrets.json').NODE_ENV}` === 'production' ? 'https://api.varfdeforma.ro' : 'http://localhost:8080',
+      baseURL: 'http://localhost:8080',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

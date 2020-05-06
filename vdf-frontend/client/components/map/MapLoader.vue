@@ -2,11 +2,8 @@
   <div>
     <div id="map"></div>
     <template v-if="!!this.google && !!this.map">
-      <map-provider
-        :google="google"
-        :map="map"
-      >
-        <slot/>
+      <map-provider :google="google" :map="map">
+        <slot />
       </map-provider>
     </template>
   </div>
@@ -15,43 +12,42 @@
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader'
 import MapProvider from './MapProvider'
-import Secrets from '../../../secrets.json'
 
 export default {
+  components: {
+    MapProvider,
+  },
   props: {
     mapConfig: Object,
-    apiKey: String
+    apiKey: String,
   },
-  components: {
-    MapProvider
-  },
-  data(){
+  data() {
     return {
       google: null,
-      map: null
+      map: null,
     }
   },
-  mounted () {
+  mounted() {
     GoogleMapsApiLoader({
-      apiKey: Secrets.GMAP_API_KEY
+      apiKey: '',
     }).then((google) => {
       this.google = google
       this.initializeMap()
     })
   },
   methods: {
-    initializeMap (){
+    initializeMap() {
       const mapContainer = this.$el.querySelector('#map')
       const { Map } = this.google.maps
       this.map = new Map(mapContainer, this.mapConfig)
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
-  #map {
-    height: 100vh;
-    width: 100%;
-  }
+#map {
+  height: 100vh;
+  width: 100%;
+}
 </style>
