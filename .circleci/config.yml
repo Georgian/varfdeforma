@@ -14,13 +14,17 @@ orbs:
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:stretch
+      - image: circleci/node:jessie
     
     steps:
       - run:
           name: Installing dependencies
           command: |
-            sudo apt-get update || : && sudo apt-get install python -y
+            apk --no-cache add --virtual native-deps \
+              g++ gcc libgcc libstdc++ linux-headers make python && \
+              npm install --quiet node-gyp -g &&\
+              npm install --quiet && \
+              apk del native-deps
       - setup_remote_docker
       - checkout
       - run:
