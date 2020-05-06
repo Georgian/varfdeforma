@@ -14,17 +14,15 @@ orbs:
 jobs:
   build-frontend:
     docker:
-      - image: circleci/python:3-jessie-node-browsers
+      - image: circleci/node:jessie
     
     steps:
       - run:
           name: Installing dependencies
           command: |
-            apk --no-cache add --virtual native-deps \
-              g++ gcc libgcc libstdc++ linux-headers make python && \
-              npm install --quiet node-gyp -g &&\
-              npm install --quiet && \
-              apk del native-deps
+            sudo apt-get update || : && sudo apt-get install python -y
+
+
       - setup_remote_docker
       - checkout
       - run:
