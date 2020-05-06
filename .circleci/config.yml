@@ -14,15 +14,9 @@ orbs:
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:jessie
+      - image: circleci/python:3-node-browsers
     
     steps:
-      - run:
-          name: Installing dependencies
-          command: |
-            sudo apt-get update || : && sudo apt-get install python -y
-
-
       - setup_remote_docker
       - checkout
       - run:
