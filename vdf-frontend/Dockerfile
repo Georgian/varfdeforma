@@ -1,12 +1,13 @@
-FROM node:13-alpine3.10
+FROM node:10-alpine3.10
+
+# update and install dependency
+RUN apk update && apk upgrade
+# RUN apk add git
+RUN apk add python make g++
 
 # create destination directory
 RUN mkdir -p /usr/src/vdf-frontend
 WORKDIR /usr/src/vdf-frontend
-
-# update and install dependency
-RUN apk update && apk upgrade
-RUN apk add git
 
 # copy the app, note .dockerignore
 COPY . /usr/src/vdf-frontend/
