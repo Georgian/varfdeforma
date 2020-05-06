@@ -12,6 +12,24 @@ orbs:
 #    jobs:
 #      - welcome/run
 jobs:
+  build-frontend:
+    docker:
+      - image: circleci/node:stretch
+    
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          # TODO Should either:
+          # A. Create a multi-project gradle build script
+          # B. Create parallel CircleCI jobs to build each docker image
+          name: Build docker images
+          command: |
+            pwd
+            cd vdf-frontend
+            docker build -t georgian/vdf-frontend:latest .
+            cd ..
+
   build:
     working_directory: ~/vdf
   
@@ -72,3 +90,9 @@ jobs:
           name: Deploy to Digital Ocean and run services
           command: |
             bash ./deploy.sh -h $DEPLOY_HOST -u $DEPLOY_USER -r $RAW_REPO_URL
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build-frontend
