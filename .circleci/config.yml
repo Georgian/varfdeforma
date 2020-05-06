@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Installing dependencies
           command: |
-            apt-get update || : && apt-get install python -y
+            sudo apt-get update || : && sudo apt-get install python -y
       - setup_remote_docker
       - checkout
       - run:
