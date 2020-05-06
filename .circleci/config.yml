@@ -1,0 +1,98 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
+#workflows:
+#  # Name the workflow "welcome"
+#  welcome:
+#    # Run the welcome/run job in its own container
+#    jobs:
+#      - welcome/run
+jobs:
+  build-frontend:
+    docker:
+      - image: circleci/python:3-node-browsers
+    
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          # TODO Should either:
+          # A. Create a multi-project gradle build script
+          # B. Create parallel CircleCI jobs to build each docker image
+          name: Build docker images
+          command: |
+            pwd
+            cd vdf-frontend
+            docker build -t georgian/vdf-frontend:latest .
+            cd ..
+
+  build:
+    working_directory: ~/vdf
+  
+    docker:
+      - image: docker:18.06.0-ce
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+              run apk --no-cache add openssh-client \
+              run apk --no-cache add --virtual native-deps \
+                g++ gcc libgcc libstdc++ linux-headers make python && \
+                npm install --quiet node-gyp -g &&\
+                npm install --quiet && \
+                apk del native-deps
+                  
+      - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
+                  
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+              - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+              - v1-dependencies-
+          
+      - run: gradle dependencies
+
+      - save_cache:
+          paths:
+              - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+                  
+      - run:
+          # TODO Should either:
+          # A. Create a multi-project gradle build script
+          # B. Create parallel CircleCI jobs to build each docker image
+          name: Build docker images
+          command: |
+            pwd
+            #cd vdf-backend
+            #gradle dockerBuildImage
+            #cd ../vdf-frontend
+            cd vdf-frontend
+            docker build -t georgian/vdf-frontend:latest .
+            cd ..
+            
+      - run:
+          name: Push docker images
+          command: |
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push georgian/vdf-backend:latest
+            docker push georgian/vdf-frontend:latest
+            
+      - run:
+          name: Deploy to Digital Ocean and run services
+          command: |
+            bash ./deploy.sh -h $DEPLOY_HOST -u $DEPLOY_USER -r $RAW_REPO_URL
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build-frontend
