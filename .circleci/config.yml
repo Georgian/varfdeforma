@@ -72,7 +72,7 @@ workflows:
       - build-frontend
       - build-backend
       - deploy:
-        requires:
-          - build-frontend
-          - build-backend
+          requires:
+            - build-frontend
+            - build-backend
 
