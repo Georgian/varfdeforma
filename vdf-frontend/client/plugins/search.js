@@ -1,20 +1,20 @@
 // https://github.com/algolia/react-instantsearch/issues/2847#issuecomment-535476270
 import { createInstantSearch } from 'vue-instantsearch'
-import algoliaHelper from 'algoliasearch-helper'
-import { _objectSpread } from 'vue-instantsearch/src/util/polyfills'
 
 export default ({ app }, inject) => {
   const reqCache = new Map()
   const promiseCache = new Map()
 
   const doRequest = (body) =>
-    fetch('http://localhost:8080/search', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
-    }).then((res) => res.json())
+    app.$axios
+      .post('/search', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      })
+      .then((res) => res.data)
 
   const searchClient = {
     async search(requests) {

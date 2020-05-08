@@ -27,6 +27,8 @@ services:
     restart: always
     ports:
       - 3000:3000
+    environment:
+      API_URL: http://vdf-backend:8080
   # nginx:
   #   image: nginx:1.17
   #   container_name: nginx

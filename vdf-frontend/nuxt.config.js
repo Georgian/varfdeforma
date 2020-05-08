@@ -60,7 +60,7 @@ module.exports = {
   env: dotenv.parsed,
   modules: [
     ['@nuxtjs/axios', {
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.API_URL || 'http://localhost:8080',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
