@@ -64,6 +64,7 @@ jobs:
           name: Deploy to Digital Ocean and run services
           command: |
             pwd
+            ls
             bash ./deploy.sh -h $DEPLOY_HOST -u $DEPLOY_USER -r $RAW_REPO_URL
       
 workflows:
