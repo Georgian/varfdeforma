@@ -55,8 +55,8 @@ jobs:
             docker push georgian/vdf-backend:latest
 
   deploy:
-    docker:
-      - image: docker:18.06.0-ce
+    machine:
+      - image: ubuntu-1604:202004-01
       
     steps:
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
