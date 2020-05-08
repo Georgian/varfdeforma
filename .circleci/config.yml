@@ -71,7 +71,4 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - deploy
-        requires:
-          - build-frontend
-          - build-backend
+
