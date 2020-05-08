@@ -46,7 +46,7 @@ jobs:
           name: Build docker images
           command: |
             cd vdf-backend
-            docker build -t georgian/vdf-backend:latest .
+            gradle dockerBuildImage
             
       - run:
           name: Push docker images
@@ -71,4 +71,8 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
+      - deploy:
+        requires:
+          - build-frontend
+          - build-backend
 
