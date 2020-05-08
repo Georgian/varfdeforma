@@ -63,16 +63,17 @@ jobs:
       - run:
           name: Deploy to Digital Ocean and run services
           command: |
+            pwd
             bash ./deploy.sh -h $DEPLOY_HOST -u $DEPLOY_USER -r $RAW_REPO_URL
       
 workflows:
   version: 2
   main-workflow:
     jobs:
-      - build-frontend
-      - build-backend
-      - deploy:
-          requires:
-            - build-frontend
-            - build-backend
+#       - build-frontend
+#       - build-backend
+      - deploy
+#           requires:
+#             - build-frontend
+#             - build-backend
 
