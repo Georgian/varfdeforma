@@ -72,10 +72,10 @@ workflows:
   version: 2
   main-workflow:
     jobs:
-#       - build-frontend
-#       - build-backend
+      - build-frontend
+      - build-backend
       - deploy
-#           requires:
-#             - build-frontend
-#             - build-backend
+          requires:
+            - build-frontend
+            - build-backend
 
