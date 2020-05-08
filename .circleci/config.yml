@@ -59,6 +59,7 @@ jobs:
       image: ubuntu-1604:202004-01
       
     steps:
+      - checkout
       - run: ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
       - run:
           name: Deploy to Digital Ocean and run services
