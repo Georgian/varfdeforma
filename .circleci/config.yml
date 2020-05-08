@@ -22,7 +22,7 @@ jobs:
   
   build-backend:  
     docker:
-      - image: docker:18.06.0-ce
+      - image: circleci/openjdk:11-jdk
 
     steps:
       - setup_remote_docker
