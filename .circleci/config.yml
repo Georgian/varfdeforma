@@ -67,11 +67,11 @@ jobs:
       
 workflows:
   version: 2
-  test:
+  main-workflow:
     jobs:
       - build-frontend
       - build-backend
-      - deploy:
+      - deploy
         requires:
           - build-frontend
           - build-backend
