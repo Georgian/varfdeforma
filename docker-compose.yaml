@@ -28,15 +28,15 @@ services:
     ports:
       - 3000:3000
     environment:
-      API_URL: http://vdf-backend:8080
-  # nginx:
-  #   image: nginx:1.17
-  #   container_name: nginx
-  #   ports:
-  #     - 80:80
-  #   volumes:
-  #     - ./nginx:/etc/nginx/conf.d
-  #   depends_on:
-  #     - vdf-frontend
+      API_URL: 'http://vdf-backend:8080'
+  nginx:
+    image: nginx:1.17
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - vdf-frontend
 volumes:
   vdf-db:
