@@ -72,12 +72,12 @@ workflows:
   version: 2
   main-workflow:
     jobs:
-      - build-frontend
+      - build-frontend:
           filters:
             branches:
               only:
                 - prod
-      - build-backend
+      - build-backend:
           filters:
             branches:
               only:
