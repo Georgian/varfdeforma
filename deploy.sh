@@ -46,7 +46,6 @@ docker system prune -f
 printf "$DOWNLOAD Downloading the docker-compose configuration...\n\n"
 printf "Pulling config from $repository_base_url\n\n"
 curl "$repository_base_url"/docker-compose.yaml --output docker-compose.yaml
-mkdir -p nginx && curl "$repository_base_url"/nginx/default.conf --output nginx/default.conf
 
 printf "\n$BROOM Stopping and removing containers and volumes...\n\n"
 docker-compose down -v
