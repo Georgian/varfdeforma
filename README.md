@@ -1,3 +1,9 @@
+## Fresh prod server setup (e.g. Ubuntu 18.04 droplet on DigitalOcean; but this could work for AWS too)
+
+1. Initial server setup https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+2. Install and configure Nginx https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
+3. Secure nginx with letsencrypt https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04
+
 ## CircleCi
 ### Environment variables
 - DEPLOY_HOST -> IP of digitalocean droplet
