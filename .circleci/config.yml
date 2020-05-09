@@ -70,14 +70,23 @@ jobs:
       
 workflows:
   version: 2
-  branches:
-    - only: 
-        prod
   main-workflow:
     jobs:
       - build-frontend
+          filters:
+            branches:
+              only:
+                - prod
       - build-backend
+          filters:
+            branches:
+              only:
+                - prod
       - deploy:
+          filters:
+            branches:
+              only:
+                - prod
           requires:
             - build-frontend
             - build-backend
