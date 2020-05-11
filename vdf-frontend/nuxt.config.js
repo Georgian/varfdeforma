@@ -57,7 +57,6 @@ module.exports = {
     },
     publicPath: `/${process.env.NODE_ENV}/_nuxt/`, // <= add the path to the cached files
   },
-  env: dotenv.parsed,
   modules: [
     ['@nuxtjs/axios', {
       baseURL: process.env.API_URL || 'http://localhost:8080',
