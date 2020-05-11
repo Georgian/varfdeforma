@@ -13,12 +13,10 @@
             label="Password"
             type="password"
           ></v-text-field>
-          <v-btn type="submit" :loading="loading" disabled="true"
-            >Log In</v-btn
-          >
+          <v-btn type="submit" :loading="loading" disabled="true">Log In</v-btn>
           <v-btn
             v-if="facebook_ready"
-            :href="`${$axios.defaults.baseURL}/oauth2/authorize/facebook?redirect_uri=${redirect_uri}`"
+            :href="login_uri"
             color="blue white--text"
             :loading="facebook_loading"
             :disabled="facebook_loading"
@@ -41,8 +39,18 @@ export default {
       loading: false,
       facebook_loading: false,
       facebook_ready: true,
-      redirect_uri: process.env.baseFrontendURL + '/signed-in',
+      redirect_uri: process.env.FRONTEND_BASE_URL + '/signed-in',
+      api_url: process.env.API_URL,
     }
+  },
+  computed: {
+    login_uri() {
+      return (
+        this.api_url +
+        '/oauth2/authorize/facebook?redirect_uri=' +
+        this.redirect_uri
+      )
+    },
   },
   mounted() {
     if (this.$store.getters.isAuthenticated) this.$router.replace('/')

@@ -29,5 +29,6 @@ services:
       - 3000:3000
     environment:
       API_URL: 'http://vdf-backend:8080'
+      FRONTEND_BASE_URL: 'https://varfdeforma.ro'
 volumes:
   vdf-db:
