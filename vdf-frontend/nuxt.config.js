@@ -5,8 +5,8 @@ module.exports = {
   mode: 'universal',
   plugins: [
     {src: '~/plugins/v-calendar.js', mode: 'client'},
-    '~/plugins/main.js',
     {src:'~/plugins/fb-sdk.js', mode: 'client'},
+    '~/plugins/main.js',
     '~/plugins/search.js',
     '~/plugins/axios.js'
   ],
@@ -57,9 +57,19 @@ module.exports = {
     },
     publicPath: `/${process.env.NODE_ENV}/_nuxt/`, // <= add the path to the cached files
   },
+  proxy: {
+    '/api/': { target: process.env.BACKEND_URL, pathRewrite: {'^/api/': ''}, changeOrigin: true },
+  },
   modules: [
+    ['nuxt-env', {
+      keys: [
+        'BACKEND_URL',
+        'FRONTEND_URL',
+      ]
+    }],
     ['@nuxtjs/axios', {
-      baseURL: process.env.API_URL || 'http://localhost:8080',
+      proxy: true,
+      baseURL: process.env.FRONTEND_URL,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

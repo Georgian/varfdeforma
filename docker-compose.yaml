@@ -1,13 +1,6 @@
 version: '3.7'
 
 services:
-  vdf-backend:
-    container_name: vdf-backend
-    image: georgian/vdf-backend:latest
-    ports:
-      - 8080:8080
-    depends_on:
-      - vdf-db
   vdf-db:
     container_name: vdf-db
     image: mysql:5.7.18
@@ -21,6 +14,13 @@ services:
       MYSQL_USER: 'vdf'
       MYSQL_PASSWORD: 'pass'
       MYSQL_ROOT_PASSWORD: 'wi4nt9rsbn'
+  vdf-backend:
+    container_name: vdf-backend
+    image: georgian/vdf-backend:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - vdf-db
   vdf-frontend:
     container_name: vdf-frontend
     image: georgian/vdf-frontend:latest
@@ -28,7 +28,9 @@ services:
     ports:
       - 3000:3000
     environment:
-      API_URL: 'http://vdf-backend:8080'
-      FRONTEND_BASE_URL: 'https://varfdeforma.ro'
+      BACKEND_URL: 'http://vdf-backend:8080'
+      FRONTEND_URL: 'https://varfdeforma.ro'
+    depends_on:
+      - vdf-backend
 volumes:
   vdf-db:

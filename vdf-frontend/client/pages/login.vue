@@ -16,7 +16,7 @@
           <v-btn type="submit" :loading="loading" disabled="true">Log In</v-btn>
           <v-btn
             v-if="facebook_ready"
-            :href="login_uri"
+            :href="loginUri"
             color="blue white--text"
             :loading="facebook_loading"
             :disabled="facebook_loading"
@@ -39,17 +39,17 @@ export default {
       loading: false,
       facebook_loading: false,
       facebook_ready: true,
-      redirect_uri: process.env.FRONTEND_BASE_URL + '/signed-in',
-      api_url: process.env.API_URL,
     }
   },
   computed: {
-    login_uri() {
-      return (
-        this.api_url +
-        '/oauth2/authorize/facebook?redirect_uri=' +
-        this.redirect_uri
-      )
+    frontendUrl() {
+      return this.$env.FRONTEND_URL
+    },
+    redirectUri() {
+      return this.frontendUrl + '/signed-in'
+    },
+    loginUri() {
+      return '/api/oauth2/authorize/facebook?redirect_uri=' + this.redirectUri
     },
   },
   mounted() {

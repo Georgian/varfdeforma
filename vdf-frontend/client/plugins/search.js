@@ -6,7 +6,7 @@ export default ({ app }, inject) => {
   const promiseCache = new Map()
 
   const doRequest = (body) =>
-    app.$axios.post('/search', body).then((res) => res.data)
+    app.$axios.post('/api/search', body).then((res) => res.data)
 
   const searchClient = {
     async search(requests) {
