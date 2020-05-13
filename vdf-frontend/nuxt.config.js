@@ -57,9 +57,9 @@ module.exports = {
     },
     publicPath: `/${process.env.NODE_ENV}/_nuxt/`, // <= add the path to the cached files
   },
-  proxy: {
-    '/api/': { target: process.env.BACKEND_URL, pathRewrite: {'^/api/': ''}, changeOrigin: true },
-  },
+  // proxy: {
+  //   '/api/': { target: process.env.BACKEND_URL, changeOrigin: true },
+  // },
   modules: [
     ['nuxt-env', {
       keys: [
@@ -68,8 +68,8 @@ module.exports = {
       ]
     }],
     ['@nuxtjs/axios', {
-      proxy: true,
-      baseURL: process.env.FRONTEND_URL,
+      // proxy: true,
+      baseURL: process.env.BACKEND_URL,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
