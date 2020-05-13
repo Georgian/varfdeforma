@@ -45,11 +45,18 @@ export default {
     frontendUrl() {
       return this.$env.FRONTEND_URL
     },
+    backendUrl() {
+      return this.$env.BACKEND_URL
+    },
     redirectUri() {
       return this.frontendUrl + '/signed-in'
     },
     loginUri() {
-      return '/api/oauth2/authorize/facebook?redirect_uri=' + this.redirectUri
+      return (
+        this.backendUrl +
+        '/oauth2/authorize/facebook?redirect_uri=' +
+        this.redirectUri
+      )
     },
   },
   mounted() {
