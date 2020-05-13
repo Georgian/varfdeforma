@@ -152,6 +152,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .and()
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
+//                .requiresChannel()
+//                    .antMatchers("/auth/**", "/oauth2/**", "/login/**")
+//                    .requiresSecure();
 
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
