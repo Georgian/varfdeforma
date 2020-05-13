@@ -35,3 +35,8 @@ A: Check the DB url matches the actual DB identifier (you may have changed it)
 
 Q: HTTPS link doesn't load
 A: Point the Route53 alias record to the load balancer, not the EBS link
+
+# IP and protocol forwarding to fix the facebook login redirect issues
+
+https://vkuzel.com/configuration-of-a-nginx-reverse-proxy-in-front-of-a-spring-boot-2-1-application-protected-by-oauth-2-0
+https://stackoverflow.com/questions/30164516/ssl-proxy-issue-using-spring-cloud-oauth2
