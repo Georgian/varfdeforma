@@ -60,6 +60,9 @@ module.exports = {
   // proxy: {
   //   '/api/': { target: process.env.BACKEND_URL, changeOrigin: true },
   // },
+  axios: {
+    baseURL: process.env.BACKEND_URL
+  },
   modules: [
     ['nuxt-env', {
       keys: [
@@ -69,7 +72,6 @@ module.exports = {
     }],
     ['@nuxtjs/axios', {
       // proxy: true,
-      baseURL: process.env.BACKEND_URL,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
