@@ -27,9 +27,6 @@ services:
     restart: always
     ports:
       - 3000:3000
-    environment:
-      BACKEND_URL: 'https://api.varfdeforma.ro'
-      FRONTEND_URL: 'https://varfdeforma.ro'
     depends_on:
       - vdf-backend
 volumes:
