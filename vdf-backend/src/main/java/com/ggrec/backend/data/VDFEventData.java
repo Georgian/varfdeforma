@@ -15,6 +15,8 @@ public class VDFEventData {
     private String name;
     private String organizer;
     private String photoLink;
+    private String registrationLink;
+    private String fbLink;
     private String locationName;
     private LocalDate dateStart;
     private LocalDate dateEnd;
@@ -26,6 +28,8 @@ public class VDFEventData {
                 .setId(domain.getId())
                 .setName(domain.getName())
                 .setOrganizer(domain.getOrganizer())
+                .setPhotoLink(domain.getPhotoLink())
+                .setRegistrationLink(domain.getRegistrationLink())
                 .setPhotoLink(domain.getPhotoLink())
                 .setLocationName(domain.getLocationName())
                 .setDateStart(domain.getDateStart())
