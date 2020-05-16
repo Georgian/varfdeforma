@@ -32,14 +32,6 @@ public class VDFEvent implements Serializable {
 
     private String organizer;
 
-    private String schedule;
-
-    private String prizes;
-
-    private String ageCategories;
-
-    private String tracks;
-
     private String locationName;
     private String locationCoordinates;
 
@@ -47,11 +39,9 @@ public class VDFEvent implements Serializable {
     @Transient
     private String photoLink;
 
-    private String registrationTax;
-
     private String registrationLink;
 
-    private String technicalGuideLink;
+    private String fbLink;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<VDFEventTag> tags;
