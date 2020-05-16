@@ -12,7 +12,6 @@ create table users (
 
 create table vdf_event (
     id bigint not null auto_increment,
-    age_categories varchar(255),
     date_end date,
     date_start date,
     description varchar(1000),
@@ -20,12 +19,8 @@ create table vdf_event (
     location_name varchar(255),
     name varchar(255),
     organizer varchar(255),
-    prizes varchar(255),
     registration_link varchar(255),
-    registration_tax varchar(255),
-    schedule varchar(255),
-    technical_guide_link varchar(255),
-    tracks varchar(255),
+    fb_link varchar(255),
     primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
