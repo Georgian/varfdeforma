@@ -47,8 +47,7 @@ export default {
     },
     backendUrl() {
       return this.$env.BACKEND_URL
-    },
-    redirectUri() {
+    }, redirectUri() {
       return this.frontendUrl + '/signed-in'
     },
     loginUri() {
